@@ -1,0 +1,445 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Movie API",
+    "description": "API for movies and actors",
+    "version": "1.0.0"
+  },
+  "host": "cse341-movies.onrender.com",
+  "basePath": "/",
+  "schemes": ["https"],
+  "paths": {
+    "/movies": {
+      "get": {
+        "summary": "Get all movies",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Movie"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new movie",
+        "parameters": [
+          {
+            "name": "movie",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully created"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/movies/{id}": {
+      "get": {
+        "summary": "Get a movie by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          },
+          "404": {
+            "description": "Movie not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a movie by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "movie",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated"
+          },
+          "404": {
+            "description": "Movie not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a movie by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted"
+          },
+          "404": {
+            "description": "Movie not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/actors": {
+      "get": {
+        "summary": "Get all actors",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Actor"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new actor",
+        "parameters": [
+          {
+            "name": "actor",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Actor"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully created"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/actors/{id}": {
+      "get": {
+        "summary": "Get an actor by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Actor"
+            }
+          },
+          "404": {
+            "description": "Actor not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an actor by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "actor",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Actor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated"
+          },
+          "404": {
+            "description": "Actor not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an actor by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted"
+          },
+          "404": {
+            "description": "Actor not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/movie-actors": {
+      "get": {
+        "summary": "Get all movie-actor associations",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MovieActor"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new movie-actor association",
+        "parameters": [
+          {
+            "name": "association",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MovieActor"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully created"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/movie-actors/{id}": {
+      "get": {
+        "summary": "Get a movie-actor association by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/MovieActor"
+            }
+          },
+          "404": {
+            "description": "Association not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a movie-actor association by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "association",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MovieActor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated"
+          },
+          "404": {
+            "description": "Association not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a movie-actor association by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted"
+          },
+          "404": {
+            "description": "Association not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+
+  "definitions": {
+    "Movie": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "director": {
+          "type": "string"
+        },
+        "releaseYear": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "string"
+        },
+        "runtime": {
+          "type": "string"
+        },
+        "genre": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "score": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "Actor": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "birthDate": {
+          "type": "string"
+        },
+        "deathDate": {
+          "type": "string"
+        },
+        "nationality": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MovieActor": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "movieId": {
+          "type": "string"
+        },
+        "actorId": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
