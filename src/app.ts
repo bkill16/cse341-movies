@@ -1,9 +1,16 @@
-const express = require("express");
-const mongodb = require("./db/connect");
+import express = require("express");
+import mongodb = require("./db/connect");
+import { Db } from "mongodb";
+import router from './routes';
+
 const port = process.env.PORT || 3000;
 const app = express();
 
-mongodb.initDb((err: any, db: any) => {
+app.use(express.json());
+
+app.use('/', router);
+
+mongodb.initDb((err: Error | null, _db: Db | null) => {
   if (err) {
     console.log(err);
   } else {
