@@ -54,7 +54,6 @@ const createMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             rating: req.body.rating,
             runtime: req.body.runtime,
             genre: req.body.genre,
-            cast: req.body.cast,
             score: req.body.score,
             description: req.body.description,
         };

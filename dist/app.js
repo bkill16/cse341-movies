@@ -9,7 +9,7 @@ const routes_1 = __importDefault(require("./routes"));
 const port = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
-app.use('/', routes_1.default);
+app.use("/", routes_1.default);
 mongodb.initDb((err, _db) => {
     if (err) {
         console.log(err);

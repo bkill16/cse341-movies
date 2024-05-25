@@ -2,9 +2,9 @@ import { ObjectId } from "mongodb";
 import { Request, Response } from "express";
 import { getDb } from "../db/connect";
 
-const getAllMovies = async (req: Request, res: Response) => {
+const getAllAssociations = async (req: Request, res: Response) => {
   try {
-    const result = await getDb().collection("movies").find();
+    const result = await getDb().collection("movieActors").find();
     const lists = await result.toArray();
     res.status(200).json(lists);
   } catch (err) {
@@ -16,10 +16,10 @@ const getAllMovies = async (req: Request, res: Response) => {
   }
 };
 
-const getSingleMovie = async (req: Request, res: Response) => {
+const getSingleAssociation = async (req: Request, res: Response) => {
   try {
     const result = await getDb()
-      .collection("movies")
+      .collection("movieActors")
       .findOne({ _id: new ObjectId(req.params.id) });
     res.status(200).json(result);
   } catch (err) {
@@ -31,23 +31,20 @@ const getSingleMovie = async (req: Request, res: Response) => {
   }
 };
 
-const createMovie = async (req: Request, res: Response) => {
+const createAssociation = async (req: Request, res: Response) => {
   try {
-    const movie = {
-      title: req.body.title,
-      director: req.body.director,
-      releaseYear: req.body.releaseYear,
-      rating: req.body.rating,
-      runtime: req.body.runtime,
-      genre: req.body.genre,
-      score: req.body.score,
-      description: req.body.description,
+    const { movieId, actorId } = req.body;
+    const association = {
+      movieId: new ObjectId(movieId),
+      actorId: new ObjectId(actorId),
     };
-    const result = await getDb().collection("movies").insertOne(movie);
+    const result = await getDb()
+      .collection("movieActors")
+      .insertOne(association);
     if (result.acknowledged) {
       res.status(201).json(result);
     } else {
-      res.status(500).json({ message: "Failed to create movie" });
+      res.status(500).json({ message: "Failed to create assocation" });
     }
   } catch (err) {
     if (err instanceof Error) {
@@ -58,4 +55,4 @@ const createMovie = async (req: Request, res: Response) => {
   }
 };
 
-export { getAllMovies, getSingleMovie, createMovie };
+export { getAllAssociations, getSingleAssociation, createAssociation };

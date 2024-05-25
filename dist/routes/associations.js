@@ -24,9 +24,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const moviesController = __importStar(require("../controllers/moviesController"));
+const associationController = __importStar(require("../controllers/associationController"));
 const router = (0, express_1.Router)();
-router.get("/", moviesController.getAllMovies);
-router.get("/:id", moviesController.getSingleMovie);
-router.post("/", moviesController.createMovie);
+router.get("/", associationController.getAllAssociations);
+router.get("/:id", associationController.getSingleAssociation);
+router.post("/", associationController.createAssociation);
 exports.default = router;

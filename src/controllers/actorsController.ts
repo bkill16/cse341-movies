@@ -38,7 +38,6 @@ const createActor = async (req: Request, res: Response) => {
       birthDate: req.body.birthDate,
       deathDate: req.body.deathDate,
       nationality: req.body.nationality,
-      movies: req.body.movies
     };
     const result = await getDb().collection("actors").insertOne(actor);
     if (result.acknowledged) {

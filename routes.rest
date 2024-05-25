@@ -21,9 +21,6 @@ Content-Type: application/json
     "Adventure",
     "Drama"
   ],
-  "cast": [
-    "placeholder actor id"
-  ],
   "score": "9/10",
   "description": "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring."
 }
@@ -43,7 +40,19 @@ Content-Type: application/json
     "birthDate": "1979-06-21",
     "deathDate": null,
     "nationality": "American",
-    "movies": "movie_id_placeholder"
 }
 
+### Get movie actor associations
+GET http://localhost:3000/movie-actors
 
+### Get single movie actor association
+GET http://localhost:3000/movie-actors/665247c8824c61cc1cf46fde
+
+### Create movie actor association
+POST http://localhost:3000/movie-actors HTTP/1.1
+Content-Type: application/json
+
+{
+  "movieId": "6651ff25824c61cc1cf46fd0",
+  "actorId": "66523d6a3471813432af5bdd"
+}

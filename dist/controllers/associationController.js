@@ -9,12 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createActor = exports.getSingleActor = exports.getAllActors = void 0;
+exports.createAssociation = exports.getSingleAssociation = exports.getAllAssociations = void 0;
 const mongodb_1 = require("mongodb");
 const connect_1 = require("../db/connect");
-const getAllActors = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllAssociations = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield (0, connect_1.getDb)().collection("actors").find();
+        const result = yield (0, connect_1.getDb)().collection("movieActors").find();
         const lists = yield result.toArray();
         res.status(200).json(lists);
     }
@@ -27,11 +27,11 @@ const getAllActors = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         }
     }
 });
-exports.getAllActors = getAllActors;
-const getSingleActor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getAllAssociations = getAllAssociations;
+const getSingleAssociation = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield (0, connect_1.getDb)()
-            .collection("actors")
+            .collection("movieActors")
             .findOne({ _id: new mongodb_1.ObjectId(req.params.id) });
         res.status(200).json(result);
     }
@@ -44,21 +44,22 @@ const getSingleActor = (req, res) => __awaiter(void 0, void 0, void 0, function*
         }
     }
 });
-exports.getSingleActor = getSingleActor;
-const createActor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getSingleAssociation = getSingleAssociation;
+const createAssociation = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const actor = {
-            name: req.body.name,
-            birthDate: req.body.birthDate,
-            deathDate: req.body.deathDate,
-            nationality: req.body.nationality,
+        const { movieId, actorId } = req.body;
+        const association = {
+            movieId: new mongodb_1.ObjectId(movieId),
+            actorId: new mongodb_1.ObjectId(actorId),
         };
-        const result = yield (0, connect_1.getDb)().collection("actors").insertOne(actor);
+        const result = yield (0, connect_1.getDb)()
+            .collection("movieActors")
+            .insertOne(association);
         if (result.acknowledged) {
             res.status(201).json(result);
         }
         else {
-            res.status(500).json({ message: "Failed to create actor" });
+            res.status(500).json({ message: "Failed to create assocation" });
         }
     }
     catch (err) {
@@ -70,4 +71,4 @@ const createActor = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         }
     }
 });
-exports.createActor = createActor;
+exports.createAssociation = createAssociation;
