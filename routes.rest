@@ -28,6 +28,26 @@ Content-Type: application/json
   "description": "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring."
 }
 
+### Update movie
+PUT http://localhost:3000/movies/665b4bff1bd2ec30b1c41af7 HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "The Lord of the Rings: The Return of the King",
+  "director": "Peter Jackson", 
+  "releaseYear": "2003",
+  "rating": "PG-13",
+  "runtime": "3h 21m",
+  "genre": [
+    "Action"
+  ],
+  "score": "9/10",
+  "description": "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring."
+}
+
+### Delete movie
+DELETE http://localhost:3000/movies/665b4bff1bd2ec30b1c41af7 HTTP/1.1
+
 ### Get all actors
 GET http://localhost:3000/actors
 
@@ -42,8 +62,22 @@ Content-Type: application/json
     "name": "Chris Pratt",
     "birthDate": "1979-06-21",
     "deathDate": null,
-    "nationality": "American",
+    "nationality": "American"
 }
+
+### Update actor
+PUT http://localhost:3000/actors/665b4e011bd2ec30b1c41af8 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Christopher Pratt",
+  "birthDate": "1979-06-21",
+  "deathDate": null,
+  "nationality": "American"
+}
+
+### Delete actor
+DELETE http://localhost:3000/actors/665b4e011bd2ec30b1c41af8 HTTP/1.1
 
 ### Get movie actor associations
 GET http://localhost:3000/movie-actors
@@ -60,13 +94,25 @@ Content-Type: application/json
   "actorId": "66523d6a3471813432af5bdd"
 }
 
+### Update movie actor association
+PUT http://localhost:3000/movie-actors/665b4f6b1bd2ec30b1c41af9 HTTP/1.1
+Content-Type: application/json
+
+{
+  "movieId": "66523d6a3471813432af5bdd",
+  "actorId": "6651ff25824c61cc1cf46fd0"
+}
+
+### Delete movie actor association
+DELETE http://localhost:3000/movie-actors/665b4f6b1bd2ec30b1c41af9 HTTP/1.1
+
 // render
 
 ### Get all movies
 GET https://cse341-movies.onrender.com/movies
 
 ### Get movie by id
-GET https://cse341-movies.onrender.com/movies/651ff25824c61cc1cf46fd0
+GET https://cse341-movies.onrender.com/movies/6651ff25824c61cc1cf46fd0
 
 ### Create movie
 POST https://cse341-movies.onrender.com/movies HTTP/1.1
@@ -87,6 +133,26 @@ Content-Type: application/json
   "description": "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring."
 }
 
+### Update movie
+PUT https://cse341-movies.onrender.com/movies/665b7b56016ed551f60493b7 HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "The Lord of the Rings: The Return of the King",
+  "director": "Peter Jackson", 
+  "releaseYear": "2003",
+  "rating": "PG-13",
+  "runtime": "3h 21m",
+  "genre": [
+    "Action"
+  ],
+  "score": "9/10",
+  "description": "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring."
+}
+
+### Delete movie
+DELETE https://cse341-movies.onrender.com/movies/665b7b56016ed551f60493b7 HTTP/1.1
+
 ### Get all actors
 GET https://cse341-movies.onrender.com/actors
 
@@ -101,8 +167,22 @@ Content-Type: application/json
     "name": "Chris Pratt",
     "birthDate": "1979-06-21",
     "deathDate": null,
-    "nationality": "American",
+    "nationality": "American"
 }
+
+### Update actor
+PUT https://cse341-movies.onrender.com/actors/665b7c91016ed551f60493b8 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Christopher Pratt",
+  "birthDate": "1979-06-21",
+  "deathDate": null,
+  "nationality": "American"
+}
+
+### Delete actor
+DELETE https://cse341-movies.onrender.com/actors/665b7c91016ed551f60493b8 HTTP/1.1
 
 ### Get movie actor associations
 GET https://cse341-movies.onrender.com/movie-actors
@@ -118,3 +198,15 @@ Content-Type: application/json
   "movieId": "6651ff25824c61cc1cf46fd0",
   "actorId": "66523d6a3471813432af5bdd"
 }
+
+### Update movie actor association
+PUT https://cse341-movies.onrender.com/movie-actors/665b7a6f016ed551f60493b6 HTTP/1.1
+Content-Type: application/json
+
+{
+  "movieId": "66523d6a3471813432af5bdd",
+  "actorId": "6651ff25824c61cc1cf46fd0"
+}
+
+### Delete movie actor association
+DELETE https://cse341-movies.onrender.com/movie-actors/665b7a6f016ed551f60493b6 HTTP/1.1
