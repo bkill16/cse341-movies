@@ -29,4 +29,6 @@ const router = (0, express_1.Router)();
 router.get("/", moviesController.getAllMovies);
 router.get("/:id", moviesController.getSingleMovie);
 router.post("/", moviesController.createMovie);
+router.put("/:id", moviesController.updateMovie);
+router.delete("/:id", moviesController.deleteMovie);
 exports.default = router;

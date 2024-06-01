@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Movie API",
-    "description": "API for movies and actors",
+    "title": "Movie Reviews API",
+    "description": "API for movies and reviews",
     "version": "1.0.0"
   },
   "host": "cse341-movies.onrender.com",
@@ -11,15 +11,15 @@
   "tags": [
     {
       "name": "Movies",
-      "description": "Operations related to movies"
+      "description": "CRUD operations related to movies"
     },
     {
-      "name": "Actors",
-      "description": "Operations related to actors"
+      "name": "Reviews",
+      "description": "CRUD operations related to reviews"
     },
     {
-      "name": "Movie-Actors",
-      "description": "Operations related to movie-actor associations"
+      "name": "Users",
+      "description": "CRUD operations related to users"
     }
   ],
   "paths": {
@@ -57,7 +57,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Successfully created"
+            "description": "Movie was successfully created"
           },
           "500": {
             "description": "Internal server error"
@@ -113,7 +113,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Successfully updated"
+            "description": "Movie was successfully updated"
           },
           "404": {
             "description": "Movie not found"
@@ -136,7 +136,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Successfully deleted"
+            "description": "Movie was successfully deleted"
           },
           "404": {
             "description": "Movie not found"
@@ -147,17 +147,17 @@
         }
       }
     },
-    "/actors": {
+    "/reviews": {
       "get": {
-        "summary": "Get all actors",
-        "tags": ["Actors"],
+        "summary": "Get all reviews",
+        "tags": ["Reviews"],
         "responses": {
           "200": {
             "description": "Successful response",
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Actor"
+                "$ref": "#/definitions/Review"
               }
             }
           },
@@ -167,21 +167,21 @@
         }
       },
       "post": {
-        "summary": "Create a new actor",
-        "tags": ["Actors"],
+        "summary": "Create a new review",
+        "tags": ["Reviews"],
         "parameters": [
           {
-            "name": "actor",
+            "name": "review",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Actor"
+              "$ref": "#/definitions/Review"
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "Successfully created"
+            "description": "Review was successfully created"
           },
           "500": {
             "description": "Internal server error"
@@ -189,10 +189,10 @@
         }
       }
     },
-    "/actors/{id}": {
+    "/reviews/{id}": {
       "get": {
-        "summary": "Get an actor by ID",
-        "tags": ["Actors"],
+        "summary": "Get a review by ID",
+        "tags": ["Reviews"],
         "parameters": [
           {
             "name": "id",
@@ -205,11 +205,11 @@
           "200": {
             "description": "Successful response",
             "schema": {
-              "$ref": "#/definitions/Actor"
+              "$ref": "#/definitions/Review"
             }
           },
           "404": {
-            "description": "Actor not found"
+            "description": "Review not found"
           },
           "500": {
             "description": "Internal server error"
@@ -217,8 +217,8 @@
         }
       },
       "put": {
-        "summary": "Update an actor by ID",
-        "tags": ["Actors"],
+        "summary": "Update a review by ID",
+        "tags": ["Reviews"],
         "parameters": [
           {
             "name": "id",
@@ -227,20 +227,20 @@
             "type": "string"
           },
           {
-            "name": "actor",
+            "name": "review",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Actor"
+              "$ref": "#/definitions/Review"
             }
           }
         ],
         "responses": {
           "204": {
-            "description": "Successfully updated"
+            "description": "Review was successfully updated"
           },
           "404": {
-            "description": "Actor not found"
+            "description": "Review not found"
           },
           "500": {
             "description": "Internal server error"
@@ -248,8 +248,8 @@
         }
       },
       "delete": {
-        "summary": "Delete an actor by ID",
-        "tags": ["Actors"],
+        "summary": "Delete a review by ID",
+        "tags": ["Reviews"],
         "parameters": [
           {
             "name": "id",
@@ -260,10 +260,10 @@
         ],
         "responses": {
           "204": {
-            "description": "Successfully deleted"
+            "description": "Review was successfully deleted"
           },
           "404": {
-            "description": "Actor not found"
+            "description": "Review not found"
           },
           "500": {
             "description": "Internal server error"
@@ -271,17 +271,17 @@
         }
       }
     },
-    "/movie-actors": {
+    "/users": {
       "get": {
-        "summary": "Get all movie-actor associations",
-        "tags": ["Movie-Actors"],
+        "summary": "Get all users",
+        "tags": ["Users"],
         "responses": {
           "200": {
             "description": "Successful response",
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/MovieActor"
+                "$ref": "#/definitions/User"
               }
             }
           },
@@ -291,21 +291,21 @@
         }
       },
       "post": {
-        "summary": "Create a new movie-actor association",
-        "tags": ["Movie-Actors"],
+        "summary": "Create a new user",
+        "tags": ["Users"],
         "parameters": [
           {
-            "name": "association",
+            "name": "user",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MovieActor"
+              "$ref": "#/definitions/User"
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "Successfully created"
+            "description": "User was successfully created"
           },
           "500": {
             "description": "Internal server error"
@@ -313,10 +313,10 @@
         }
       }
     },
-    "/movie-actors/{id}": {
+    "/users/{id}": {
       "get": {
-        "summary": "Get a movie-actor association by ID",
-        "tags": ["Movie-Actors"],
+        "summary": "Get a user by ID",
+        "tags": ["Users"],
         "parameters": [
           {
             "name": "id",
@@ -329,11 +329,11 @@
           "200": {
             "description": "Successful response",
             "schema": {
-              "$ref": "#/definitions/MovieActor"
+              "$ref": "#/definitions/User"
             }
           },
           "404": {
-            "description": "Association not found"
+            "description": "User not found"
           },
           "500": {
             "description": "Internal server error"
@@ -341,8 +341,8 @@
         }
       },
       "put": {
-        "summary": "Update a movie-actor association by ID",
-        "tags": ["Movie-Actors"],
+        "summary": "Update a user by ID",
+        "tags": ["Users"],
         "parameters": [
           {
             "name": "id",
@@ -351,20 +351,20 @@
             "type": "string"
           },
           {
-            "name": "association",
+            "name": "user",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MovieActor"
+              "$ref": "#/definitions/User"
             }
           }
         ],
         "responses": {
           "204": {
-            "description": "Successfully updated"
+            "description": "User was successfully updated"
           },
           "404": {
-            "description": "Association not found"
+            "description": "User not found"
           },
           "500": {
             "description": "Internal server error"
@@ -372,8 +372,8 @@
         }
       },
       "delete": {
-        "summary": "Delete a movie-actor association by ID",
-        "tags": ["Movie-Actors"],
+        "summary": "Delete a user by ID",
+        "tags": ["Users"],
         "parameters": [
           {
             "name": "id",
@@ -384,10 +384,10 @@
         ],
         "responses": {
           "204": {
-            "description": "Successfully deleted"
+            "description": "User was successfully deleted"
           },
           "404": {
-            "description": "Association not found"
+            "description": "User not found"
           },
           "500": {
             "description": "Internal server error"
@@ -396,7 +396,6 @@
       }
     }
   },
-
   "definitions": {
     "Movie": {
       "type": "object",
@@ -407,48 +406,28 @@
         "title": {
           "type": "string"
         },
-        "director": {
-          "type": "string"
-        },
         "releaseYear": {
           "type": "string"
         },
-        "rating": {
+        "director": {
+          "type": "string"
+        },
+        "rated": {
           "type": "string"
         },
         "runtime": {
           "type": "string"
         },
-        "genre": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "score": {
-          "type": "string"
-        },
         "description": {
           "type": "string"
-        }
-      }
-    },
-    "Actor": {
-      "type": "object",
-      "properties": {
-        "_id": {
-          "type": "string"
         },
-        "name": {
-          "type": "string"
+        "cast": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
-        "birthDate": {
-          "type": "string"
-        },
-        "deathDate": {
-          "type": "string"
-        },
-        "nationality": {
+        "genres": {
           "type": "array",
           "items": {
             "type": "string"
@@ -456,7 +435,7 @@
         }
       }
     },
-    "Movie-Actors": {
+    "Review": {
       "type": "object",
       "properties": {
         "_id": {
@@ -465,7 +444,30 @@
         "movieId": {
           "type": "string"
         },
-        "actorId": {
+        "userId": {
+          "type": "string"
+        },
+        "score": {
+          "type": "integer"
+        },
+        "comment": {
+          "type": "string"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "email": {
           "type": "string"
         }
       }

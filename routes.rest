@@ -1,212 +1,240 @@
-### Swagger UI
+### Swagger ui
 GET https://cse341-movies.onrender.com/api-docs
 
-//localhost
+// LOCALHOST - MOVIES
 
 ### Get all movies
-GET http://localhost:3000/movies
+GET http://localhost:3000/movies HTTP/1.1
 
 ### Get movie by id
-GET http://localhost:3000/movies/6651ff25824c61cc1cf46fd0
+GET http://localhost:3000/movies/665b8a84132fccb1d04f8c91 HTTP/1.1
 
-### Create movie
-POST http://localhost:3000/movies HTTP/1.1 
+### Create new movie
+POST http://localhost:3000/movies HTTP/1.1
 Content-Type: application/json
 
 {
-  "title": "The Lord of the Rings: The Return of the King",
-  "director": "Peter Jackson", 
-  "releaseYear": "2003",
-  "rating": "PG-13",
-  "runtime": "3h 21m",
-  "genre": [
-    "Action",
-    "Adventure",
-    "Drama"
+  "title": "The Awesome Movie",
+  "releaseYear": "2024",
+  "director": "John Smith",
+  "rated": "PG-13",
+  "runtime": "120 mins",
+  "description": "This is a really awesome movie",
+  "cast": [
+    "Billy Bob",
+    "Donald Duck"
   ],
-  "score": "9/10",
-  "description": "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring."
+  "genres": [
+    "Adventure",
+    "Romance"
+  ]
 }
 
 ### Update movie
-PUT http://localhost:3000/movies/665b4bff1bd2ec30b1c41af7 HTTP/1.1
+PUT http://localhost:3000/movies/665b8f970d62e7781690db52 HTTP/1.1
 Content-Type: application/json
 
 {
-  "title": "The Lord of the Rings: The Return of the King",
-  "director": "Peter Jackson", 
-  "releaseYear": "2003",
-  "rating": "PG-13",
-  "runtime": "3h 21m",
-  "genre": [
-    "Action"
+  "title": "The Cool Movie",
+  "releaseYear": "2024",
+  "director": "John Smith",
+  "rated": "PG-13",
+  "runtime": "120 mins",
+  "description": "This is a really cool movie",
+  "cast": [
+    "Billy Bob",
+    "Donald Duck",
+    "Mickey Mouse"
   ],
-  "score": "9/10",
-  "description": "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring."
+  "genres": [
+    "Adventure",
+    "Romance",
+    "Action"
+  ]
 }
 
 ### Delete movie
-DELETE http://localhost:3000/movies/665b4bff1bd2ec30b1c41af7 HTTP/1.1
+DELETE http://localhost:3000/movies/665b8f970d62e7781690db52 HTTP/1.1
 
-### Get all actors
-GET http://localhost:3000/actors
-
-### Get actor by id
-GET http://localhost:3000/actors/665236b2824c61cc1cf46fd5
-
-### Create actor
-POST http://localhost:3000/actors HTTP/1.1 
-Content-Type: application/json
-
-{
-    "name": "Chris Pratt",
-    "birthDate": "1979-06-21",
-    "deathDate": null,
-    "nationality": "American"
-}
-
-### Update actor
-PUT http://localhost:3000/actors/665b4e011bd2ec30b1c41af8 HTTP/1.1
-Content-Type: application/json
-
-{
-  "name": "Christopher Pratt",
-  "birthDate": "1979-06-21",
-  "deathDate": null,
-  "nationality": "American"
-}
-
-### Delete actor
-DELETE http://localhost:3000/actors/665b4e011bd2ec30b1c41af8 HTTP/1.1
-
-### Get movie actor associations
-GET http://localhost:3000/movie-actors
-
-### Get single movie actor association
-GET http://localhost:3000/movie-actors/665247c8824c61cc1cf46fde
-
-### Create movie actor association
-POST http://localhost:3000/movie-actors HTTP/1.1
-Content-Type: application/json
-
-{
-  "movieId": "6651ff25824c61cc1cf46fd0",
-  "actorId": "66523d6a3471813432af5bdd"
-}
-
-### Update movie actor association
-PUT http://localhost:3000/movie-actors/665b4f6b1bd2ec30b1c41af9 HTTP/1.1
-Content-Type: application/json
-
-{
-  "movieId": "66523d6a3471813432af5bdd",
-  "actorId": "6651ff25824c61cc1cf46fd0"
-}
-
-### Delete movie actor association
-DELETE http://localhost:3000/movie-actors/665b4f6b1bd2ec30b1c41af9 HTTP/1.1
-
-// render
+// RENDER - MOVIES
 
 ### Get all movies
-GET https://cse341-movies.onrender.com/movies
+GET https://cse341-movies.onrender.com/movies HTTP/1.1
 
 ### Get movie by id
-GET https://cse341-movies.onrender.com/movies/6651ff25824c61cc1cf46fd0
+GET https://cse341-movies.onrender.com/movies/665b8a84132fccb1d04f8c91 HTTP/1.1
 
-### Create movie
+### Create new movie
 POST https://cse341-movies.onrender.com/movies HTTP/1.1
 Content-Type: application/json
 
 {
-  "title": "The Lord of the Rings: The Return of the King",
-  "director": "Peter Jackson", 
-  "releaseYear": "2003",
-  "rating": "PG-13",
-  "runtime": "3h 21m",
-  "genre": [
-    "Action",
-    "Adventure",
-    "Drama"
+  "title": "The Awesome Movie",
+  "releaseYear": "2024",
+  "director": "John Smith",
+  "rated": "PG-13",
+  "runtime": "120 mins",
+  "description": "This is a really awesome movie",
+  "cast": [
+    "Billy Bob",
+    "Donald Duck"
   ],
-  "score": "9/10",
-  "description": "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring."
+  "genres": [
+    "Adventure",
+    "Romance"
+  ]
 }
 
 ### Update movie
-PUT https://cse341-movies.onrender.com/movies/665b7b56016ed551f60493b7 HTTP/1.1
+PUT https://cse341-movies.onrender.com/movies/665b8f970d62e7781690db52 HTTP/1.1
 Content-Type: application/json
 
 {
-  "title": "The Lord of the Rings: The Return of the King",
-  "director": "Peter Jackson", 
-  "releaseYear": "2003",
-  "rating": "PG-13",
-  "runtime": "3h 21m",
-  "genre": [
-    "Action"
+  "title": "The Cool Movie",
+  "releaseYear": "2024",
+  "director": "John Smith",
+  "rated": "PG-13",
+  "runtime": "120 mins",
+  "description": "This is a really cool movie",
+  "cast": [
+    "Billy Bob",
+    "Donald Duck",
+    "Mickey Mouse"
   ],
-  "score": "9/10",
-  "description": "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring."
+  "genres": [
+    "Adventure",
+    "Romance",
+    "Action"
+  ]
 }
 
 ### Delete movie
-DELETE https://cse341-movies.onrender.com/movies/665b7b56016ed551f60493b7 HTTP/1.1
+DELETE https://cse341-movies.onrender.com/movies/665b8f970d62e7781690db52 HTTP/1.1
 
-### Get all actors
-GET https://cse341-movies.onrender.com/actors
+// LOCALHOST - USERS
 
-### Get actor by id
-GET https://cse341-movies.onrender.com/actors/665236b2824c61cc1cf46fd5
+### Get all users
+GET http://localhost:3000/users HTTP/1.1
 
-### Create actor
-POST https://cse341-movies.onrender.com/actors HTTP/1.1
+### Get user by id
+GET http://localhost:3000/users/665b9145132fccb1d04f8c94 HTTP/1.1
+
+### Create user
+POST http://localhost:3000/users HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Chris Pratt",
-    "birthDate": "1979-06-21",
-    "deathDate": null,
-    "nationality": "American"
+  "username": "coolusername",
+  "password": "coolpassword",
+  "email": "coolemail@email.com"
 }
 
-### Update actor
-PUT https://cse341-movies.onrender.com/actors/665b7c91016ed551f60493b8 HTTP/1.1
+### Update user
+PUT http://localhost:3000/users/665b94eba89101ac2f8db87c HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "Christopher Pratt",
-  "birthDate": "1979-06-21",
-  "deathDate": null,
-  "nationality": "American"
+  "username": "cool_username",
+  "password": "awesome_password",
+  "email": "coolemail@email.com"
 }
 
-### Delete actor
-DELETE https://cse341-movies.onrender.com/actors/665b7c91016ed551f60493b8 HTTP/1.1
+### Delete user
+DELETE http://localhost:3000/users/665b94eba89101ac2f8db87c HTTP/1.1
 
-### Get movie actor associations
-GET https://cse341-movies.onrender.com/movie-actors
+// RENDER - USERS
 
-### Get single movie actor association
-GET https://cse341-movies.onrender.com/movie-actors/665247c8824c61cc1cf46fde
+### Get all users
+GET https://cse341-movies.onrender.com/users HTTP/1.1
 
-### Create movie actor association
-POST https://cse341-movies.onrender.com/movie-actors HTTP/1.1
+### Get user by id
+GET https://cse341-movies.onrender.com/users/665b9145132fccb1d04f8c94 HTTP/1.1
+
+### Create user
+POST https://cse341-movies.onrender.com/users HTTP/1.1
 Content-Type: application/json
 
 {
-  "movieId": "6651ff25824c61cc1cf46fd0",
-  "actorId": "66523d6a3471813432af5bdd"
+  "username": "coolusername",
+  "password": "coolpassword",
+  "email": "coolemail@email.com"
 }
 
-### Update movie actor association
-PUT https://cse341-movies.onrender.com/movie-actors/665b7a6f016ed551f60493b6 HTTP/1.1
+### Update user
+PUT https://cse341-movies.onrender.com/users/665b94eba89101ac2f8db87c HTTP/1.1
 Content-Type: application/json
 
 {
-  "movieId": "66523d6a3471813432af5bdd",
-  "actorId": "6651ff25824c61cc1cf46fd0"
+  "username": "cool_username",
+  "password": "awesome_password",
+  "email": "coolemail@email.com"
 }
 
-### Delete movie actor association
-DELETE https://cse341-movies.onrender.com/movie-actors/665b7a6f016ed551f60493b6 HTTP/1.1
+### Delete user
+DELETE https://cse341-movies.onrender.com/users/665b94eba89101ac2f8db87c HTTP/1.1
+
+// LOCALHOST - REVIEWS
+
+### Get all reviews
+GET http://localhost:3000/reviews HTTP/1.1
+
+### Get review by id
+GET http://localhost3000:/reviews/665b971c132fccb1d04f8c95
+
+### Create review
+POST http://localhost:3000/reviews HTTP/1.1
+Content-Type: application/json
+
+{
+  "movieId": "665b8a84132fccb1d04f8c91",
+  "userId": "665b9145132fccb1d04f8c94",
+  "score": 4.5,
+  "comment": "Great movie!"
+}
+
+### Update review
+PUT http://localhost:3000/reviews/665b9be6db496e3776ebd6fd HTTP/1.1
+Content-Type: application/json
+
+{
+  "movieId": "665b8a84132fccb1d04f8c91",
+  "userId": "665b9145132fccb1d04f8c94",
+  "score": 1,
+  "comment": "Bad movie!"
+}
+
+### Delete review
+DELETE http://localhost:3000/reviews/665b9be6db496e3776ebd6fd HTTP/1.1
+
+// RENDER - REVIEWS
+
+### Get all reviews
+GET https://cse341-movies.onrender.com/reviews HTTP/1.1
+
+### Get review by id
+GET https://cse341-movies.onrender.com/reviews/665b971c132fccb1d04f8c95
+
+### Create review
+POST https://cse341-movies.onrender.com/reviews HTTP/1.1
+Content-Type: application/json
+
+{
+  "movieId": "665b8a84132fccb1d04f8c91",
+  "userId": "665b9145132fccb1d04f8c94",
+  "score": 4.5,
+  "comment": "Great movie!"
+}
+
+### Update review
+PUT https://cse341-movies.onrender.com/reviews/665b9be6db496e3776ebd6fd HTTP/1.1
+Content-Type: application/json
+
+{
+  "movieId": "665b8a84132fccb1d04f8c91",
+  "userId": "665b9145132fccb1d04f8c94",
+  "score": 1,
+  "comment": "Bad movie!"
+}
+
+### Delete review
+DELETE https://cse341-movies.onrender.com/reviews/665b9be6db496e3776ebd6fd HTTP/1.1

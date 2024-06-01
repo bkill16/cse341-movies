@@ -22,16 +22,16 @@ const getSingleMovie = async (req: Request, res: Response) => {
 const createMovie = async (req: Request, res: Response) => {
   const movie = {
     title: req.body.title,
-    director: req.body.director,
     releaseYear: req.body.releaseYear,
-    rating: req.body.rating,
+    director: req.body.director,
+    rated: req.body.rated,
     runtime: req.body.runtime,
-    genre: req.body.genre,
-    score: req.body.score,
     description: req.body.description,
+    cast: req.body.cast,
+    genres: req.body.genres,
   };
   const response = await getDb().collection("movies").insertOne(movie);
-  
+
   if (response.acknowledged) {
     res.status(201).json(response);
   } else {
@@ -43,17 +43,17 @@ const updateMovie = async (req: Request, res: Response) => {
   const userId = new ObjectId(req.params.id);
   const movie = {
     title: req.body.title,
-    director: req.body.director,
     releaseYear: req.body.releaseYear,
-    rating: req.body.rating,
+    director: req.body.director,
+    rated: req.body.rated,
     runtime: req.body.runtime,
-    genre: req.body.genre,
-    score: req.body.score,
     description: req.body.description,
+    cast: req.body.cast,
+    genres: req.body.genres,
   };
   const response = await getDb()
-  .collection("movies")
-  .replaceOne({ _id: userId }, movie);
+    .collection("movies")
+    .replaceOne({ _id: userId }, movie);
   if (response.modifiedCount > 0) {
     res.status(204).send();
   } else {
@@ -63,7 +63,9 @@ const updateMovie = async (req: Request, res: Response) => {
 
 const deleteMovie = async (req: Request, res: Response) => {
   const userId = new ObjectId(req.params.id);
-  const response = await getDb().collection("movies").deleteOne({ _id: userId });
+  const response = await getDb()
+    .collection("movies")
+    .deleteOne({ _id: userId });
   if (response.deletedCount > 0) {
     res.status(204).send();
   } else {
@@ -71,10 +73,4 @@ const deleteMovie = async (req: Request, res: Response) => {
   }
 };
 
-export {
-  getAllMovies,
-  getSingleMovie,
-  createMovie,
-  updateMovie,
-  deleteMovie,
-};
+export { getAllMovies, getSingleMovie, createMovie, updateMovie, deleteMovie };
