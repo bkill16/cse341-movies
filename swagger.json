@@ -8,6 +8,20 @@
   "host": "cse341-movies.onrender.com",
   "basePath": "/",
   "schemes": ["https"],
+  "tags": [
+    {
+      "name": "Movies",
+      "description": "Operations related to movies"
+    },
+    {
+      "name": "Actors",
+      "description": "Operations related to actors"
+    },
+    {
+      "name": "Movie-Actors",
+      "description": "Operations related to movie-actor associations"
+    }
+  ],
   "paths": {
     "/movies": {
       "get": {
@@ -126,7 +140,8 @@
             "description": "Internal server error"
           }
         }
-      }
+      },
+      "tags": ["Movies"]
     },
     "/actors": {
       "get": {
@@ -245,7 +260,8 @@
             "description": "Internal server error"
           }
         }
-      }
+      },
+      "tags": ["Actors"]
     },
     "/movie-actors": {
       "get": {
@@ -364,7 +380,8 @@
             "description": "Internal server error"
           }
         }
-      }
+      },
+      "tags": ["Movie-Actors"]
     }
   },
 
@@ -427,7 +444,7 @@
         }
       }
     },
-    "MovieActor": {
+    "Movie-Actors": {
       "type": "object",
       "properties": {
         "_id": {
