@@ -1,12 +1,21 @@
-import { Router } from "express";
-import * as reviewsController from "../controllers/reviewsController";
+import express from "express";
+import {
+  getAllReviews,
+  getSingleReview,
+  createReview,
+  updateReview,
+  deleteReview,
+  validateReviewData,
+  validateObjectId,
+  validateRequest,
+} from "../controllers/reviewsController";
 
-const router: Router = Router();
+const router = express.Router();
 
-router.get("/", reviewsController.getAllReviews);
-router.get("/:id", reviewsController.getSingleReview);
-router.post("/", reviewsController.createReview);
-router.put("/:id", reviewsController.updateReview);
-router.delete("/:id", reviewsController.deleteReview);
+router.get("/", getAllReviews);
+router.get("/:id", validateObjectId, getSingleReview);
+router.post("/", validateReviewData, validateRequest, createReview);
+router.put("/:id", validateObjectId, validateReviewData, validateRequest, updateReview);
+router.delete("/:id", validateObjectId, deleteReview);
 
 export default router;
