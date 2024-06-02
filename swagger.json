@@ -620,22 +620,22 @@
           "type": "string"
         }
       }
-    }
-  },
-  "User": {
-    "type": "object",
-    "properties": {
-      "_id": {
-        "type": "string"
-      },
-      "username": {
-        "type": "string"
-      },
-      "password": {
-        "type": "string"
-      },
-      "email": {
-        "type": "string"
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
       }
     }
   }
