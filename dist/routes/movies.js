@@ -28,10 +28,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const moviesController = __importStar(require("../controllers/movies"));
+const validator_1 = require("../validator");
 const router = express_1.default.Router();
-router.get("/movies", moviesController.getAllMovies);
-router.get("/movies/:id", moviesController.getSingleMovie);
-router.post("/movies", moviesController.createMovie);
-router.put("/movies/:id", moviesController.updateMovie);
-router.delete("/movies/:id", moviesController.deleteMovie);
+router.get("/", moviesController.getAllMovies);
+router.get("/:id", ...(0, validator_1.idValidationRules)(), validator_1.validate, moviesController.getSingleMovie);
+router.post("/", ...(0, validator_1.movieValidationRules)(), validator_1.validate, moviesController.createMovie);
+router.put("/:id", ...(0, validator_1.movieValidationRules)(), validator_1.validate, moviesController.updateMovie);
+router.delete("/:id", ...(0, validator_1.idValidationRules)(), validator_1.validate, moviesController.deleteMovie);
 exports.default = router;
