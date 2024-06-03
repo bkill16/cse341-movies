@@ -31,7 +31,9 @@ const movieValidationRules = () => {
       .withMessage("Release year cannot be empty")
       .isString()
       .isLength({ min: 4, max: 4 })
-      .withMessage("Release year must be a 4-digit string"),
+      .withMessage("Release year must be a 4 characters long")
+      .matches(/^\d{4}$/)
+      .withMessage("Release year must be a valid 4-digit year"),
     body("director")
       .exists()
       .notEmpty()
@@ -130,13 +132,7 @@ const userValidationRules = () => {
       .withMessage("Password cannot be empty")
       .isString()
       .isLength({ min: 8 })
-      .withMessage("Password must be at least 8 characters long")
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/
-      )
-      .withMessage(
-        "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
-      ),
+      .withMessage("Password must be at least 8 characters long"),
     body("email")
       .exists()
       .notEmpty()
