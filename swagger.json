@@ -29,7 +29,7 @@
         "tags": ["Movies"],
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "Successful operation",
             "schema": {
               "type": "array",
               "items": {
@@ -38,10 +38,7 @@
             }
           },
           "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "An error occured while retrieving all movies/Internal server error"
           }
         }
       },
@@ -52,221 +49,105 @@
           {
             "name": "movie",
             "in": "body",
+            "description": "Movie object",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string"
-                },
-                "releaseYear": {
-                  "type": "string",
-                  "pattern": "^\\d{4}$"
-                },
-                "director": {
-                  "type": "string"
-                },
-                "rated": {
-                  "type": "string"
-                },
-                "runtime": {
-                  "type": "string",
-                  "pattern": "^\\d{1,3} mins$"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "cast": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "genres": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              },
-              "required": [
-                "title",
-                "releaseYear",
-                "director",
-                "rated",
-                "runtime",
-                "description",
-                "cast",
-                "genres"
-              ]
+              "$ref": "#/definitions/Movie"
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "Movie was successfully created"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ValidationError"
-            }
+            "description": "Movie created successfully"
           },
           "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "An error occured while creating the movie/Internal server error"
           }
         }
       }
     },
     "/movies/{id}": {
       "get": {
-        "summary": "Get a movie by ID",
+        "summary": "Get a single movie by ID",
         "tags": ["Movies"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "ID of the movie to retrieve",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "Successful operation",
             "schema": {
               "$ref": "#/definitions/Movie"
             }
           },
           "404": {
-            "description": "Movie not found",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Movie not found"
           },
           "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "An error occured while retrieving the movie/Internal server error"
           }
         }
       },
       "put": {
-        "summary": "Update a movie by ID",
+        "summary": "Update a movie",
         "tags": ["Movies"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "ID of the movie to update",
             "required": true,
             "type": "string"
           },
           {
             "name": "movie",
             "in": "body",
+            "description": "Updated movie object",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "type": "string"
-                },
-                "releaseYear": {
-                  "type": "string",
-                  "pattern": "^\\d{4}$"
-                },
-                "director": {
-                  "type": "string"
-                },
-                "rated": {
-                  "type": "string"
-                },
-                "runtime": {
-                  "type": "string",
-                  "pattern": "^\\d{1,3} mins$"
-                },
-                "description": {
-                  "type": "string"
-                },
-                "cast": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "genres": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              },
-              "required": [
-                "title",
-                "releaseYear",
-                "director",
-                "rated",
-                "runtime",
-                "description",
-                "cast",
-                "genres"
-              ]
+              "$ref": "#/definitions/Movie"
             }
           }
         ],
         "responses": {
           "204": {
-            "description": "Movie was successfully updated"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ValidationError"
-            }
+            "description": "Movie updated successfully"
           },
           "404": {
-            "description": "Movie not found",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Movie not found"
           },
           "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "An error occured while updating the movie/Internal server error"
           }
         }
       },
       "delete": {
-        "summary": "Delete a movie by ID",
+        "summary": "Delete a movie",
         "tags": ["Movies"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "ID of the movie to delete",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "Movie was successfully deleted"
+            "description": "Movie deleted successfully"
           },
           "404": {
-            "description": "Movie not found",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Movie not found"
           },
           "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "An error occured while deleting the movie/Internal server error"
           }
         }
       }
@@ -277,7 +158,7 @@
         "tags": ["Reviews"],
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "Successful operation",
             "schema": {
               "type": "array",
               "items": {
@@ -286,10 +167,7 @@
             }
           },
           "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "An error occured while retrieving all reviews/Internal server error"
           }
         }
       },
@@ -300,167 +178,105 @@
           {
             "name": "review",
             "in": "body",
+            "description": "Review object",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "movieId": {
-                  "type": "string"
-                },
-                "userId": {
-                  "type": "string"
-                },
-                "score": {
-                  "type": "number",
-                  "minimum": 0,
-                  "maximum": 5
-                },
-                "comment": {
-                  "type": "string"
-                }
-              },
-              "required": ["movieId", "userId", "score", "comment"]
+              "$ref": "#/definitions/Review"
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "Review was successfully created"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ValidationError"
-            }
+            "description": "Review created successfully"
           },
           "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "An error occured while creating the review/Internal server error"
           }
         }
       }
     },
     "/reviews/{id}": {
       "get": {
-        "summary": "Get a review by ID",
+        "summary": "Get a single review by ID",
         "tags": ["Reviews"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "ID of the review to retrieve",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "Successful operation",
             "schema": {
               "$ref": "#/definitions/Review"
             }
           },
           "404": {
-            "description": "Review not found",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Review not found"
           },
           "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "An error occured while retrieving the review/Internal server error"
           }
         }
       },
       "put": {
-        "summary": "Update a review by ID",
+        "summary": "Update a review",
         "tags": ["Reviews"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "ID of the review to update",
             "required": true,
             "type": "string"
           },
           {
             "name": "review",
             "in": "body",
+            "description": "Updated review object",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "movieId": {
-                  "type": "string"
-                },
-                "userId": {
-                  "type": "string"
-                },
-                "score": {
-                  "type": "number",
-                  "minimum": 0,
-                  "maximum": 5
-                },
-                "comment": {
-                  "type": "string"
-                }
-              },
-              "required": ["movieId", "userId", "score", "comment"]
+              "$ref": "#/definitions/Review"
             }
           }
         ],
         "responses": {
           "204": {
-            "description": "Review was successfully updated"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ValidationError"
-            }
+            "description": "Review updated successfully"
           },
           "404": {
-            "description": "Review not found",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Review not found"
           },
           "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "An error occured while updating the review/Internal server error"
           }
         }
       },
       "delete": {
-        "summary": "Delete a review by ID",
+        "summary": "Delete a review",
         "tags": ["Reviews"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "ID of the review to delete",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "Review was successfully deleted"
+            "description": "Review deleted successfully"
           },
           "404": {
-            "description": "Review not found",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Review not found"
           },
           "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "An error occured while deleting the review/Internal server error"
           }
         }
       }
@@ -471,7 +287,7 @@
         "tags": ["Users"],
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "Successful operation",
             "schema": {
               "type": "array",
               "items": {
@@ -480,10 +296,7 @@
             }
           },
           "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "An error occured while retrieving all users/Internal server error"
           }
         }
       },
@@ -494,250 +307,178 @@
           {
             "name": "user",
             "in": "body",
+            "description": "User object",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "username": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string",
-                  "format": "email"
-                }
-              },
-              "required": ["username", "password", "email"]
+              "$ref": "#/definitions/User"
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "User was successfully created"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ValidationError"
-            }
+            "description": "User created successfully"
           },
           "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "An error occured while creating the user/Internal server error"
           }
         }
       }
     },
     "/users/{id}": {
       "get": {
-        "summary": "Get a user by ID",
+        "summary": "Get a single user by ID",
         "tags": ["Users"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "ID of the user to retrieve",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "Successful operation",
             "schema": {
               "$ref": "#/definitions/User"
             }
           },
           "404": {
-            "description": "User not found",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "User not found"
           },
           "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "An error occured while retrieving the user/Internal server error"
           }
         }
       },
       "put": {
-        "summary": "Update a user by ID",
+        "summary": "Update a user",
         "tags": ["Users"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "ID of the user to update",
             "required": true,
             "type": "string"
           },
           {
             "name": "user",
             "in": "body",
+            "description": "Updated user object",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "username": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string",
-                  "format": "email"
-                }
-              },
-              "required": ["username", "password", "email"]
+              "$ref": "#/definitions/User"
             }
           }
         ],
         "responses": {
           "204": {
-            "description": "User was successfully updated"
-          },
-          "400": {
-            "description": "Bad Request",
-            "schema": {
-              "$ref": "#/definitions/ValidationError"
-            }
+            "description": "User updated successfully"
           },
           "404": {
-            "description": "User not found",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "User not found"
           },
           "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "An error occured while updating the user/Internal server error"
           }
         }
       },
       "delete": {
-        "summary": "Delete a user by ID",
+        "summary": "Delete a user",
         "tags": ["Users"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
+            "description": "ID of the user to delete",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
           "204": {
-            "description": "User was successfully deleted"
+            "description": "User deleted successfully"
           },
           "404": {
-            "description": "User not found",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            },
-            "definitions": {
-              "Movie": {
-                "type": "object",
-                "properties": {
-                  "_id": {
-                    "type": "string"
-                  },
-                  "title": {
-                    "type": "string"
-                  },
-                  "releaseYear": {
-                    "type": "string"
-                  },
-                  "director": {
-                    "type": "string"
-                  },
-                  "rated": {
-                    "type": "string"
-                  },
-                  "runtime": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  },
-                  "cast": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "genres": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    }
-                  }
-                }
-              },
-              "Review": {
-                "type": "object",
-                "properties": {
-                  "_id": {
-                    "type": "string"
-                  },
-                  "movieId": {
-                    "type": "string"
-                  },
-                  "userId": {
-                    "type": "string"
-                  },
-                  "score": {
-                    "type": "integer"
-                  },
-                  "comment": {
-                    "type": "string"
-                  }
-                }
-              },
-              "User": {
-                "type": "object",
-                "properties": {
-                  "_id": {
-                    "type": "string"
-                  },
-                  "username": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
-                  },
-                  "email": {
-                    "type": "string"
-                  }
-                }
-              },
-              "Error": {
-                "type": "object",
-                "properties": {
-                  "error": {
-                    "type": "string"
-                  }
-                }
-              },
-              "ValidationError": {
-                "type": "object",
-                "properties": {
-                  "errors": {
-                    "type": "object",
-                    "additionalProperties": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
+            "description": "User not found"
+          },
+          "500": {
+            "description": "An error occured while deleting the user/Internal server error"
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Movie": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "releaseYear": {
+          "type": "string"
+        },
+        "director": {
+          "type": "string"
+        },
+        "rated": {
+          "type": "string",
+          "enum": ["G", "PG", "PG-13", "R", "NC-17"]
+        },
+        "runtime": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "cast": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "genres": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Review": {
+      "type": "object",
+      "properties": {
+        "movieId": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "comment": {
+          "type": "string"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
         }
       }
     }
