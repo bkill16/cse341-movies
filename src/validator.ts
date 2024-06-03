@@ -87,16 +87,12 @@ const reviewValidationRules = () => {
       .exists()
       .notEmpty()
       .withMessage("Movie ID must not be empty")
-      .isString()
-      .withMessage("Movie ID must not be a string")
       .isMongoId()
       .withMessage("Movie ID must be a valid MongoDB ID"),
     body("userId")
       .exists()
       .notEmpty()
-      .withMessage("User ID must not be empty")
-      .isString()
-      .withMessage("User ID must not be a string")
+      .withMessage("User ID must not empty")
       .isMongoId()
       .withMessage("User ID must be a valid MongoDB ID"),
     body("score")
@@ -106,8 +102,8 @@ const reviewValidationRules = () => {
       .isNumeric()
       .withMessage("Score must be a number")
       .custom((value) => {
-        if (value < 0 || value > 5) {
-          throw new Error("Score must be between 0 and 5");
+        if (value < 0.5 || value > 5) {
+          throw new Error("Score must be between 0.5 and 5");
         }
         return true;
       }),
