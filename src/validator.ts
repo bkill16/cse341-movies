@@ -12,10 +12,9 @@ const idValidationRules = () => {
       .exists()
       .notEmpty()
       .withMessage("ID must not be empty")
-      .isString()
-      .isLength({ min: 24, max: 24 })
-      .withMessage("ID must be a 24 character string"),
-  ].map((rule) => rule.toArray());
+      .isMongoId()
+      .withMessage("Must be a valid MongoDB ID"),
+  ];
 };
 
 const movieValidationRules = () => {
@@ -79,7 +78,7 @@ const movieValidationRules = () => {
       .withMessage("Movie genres cannot be empty")
       .isArray()
       .withMessage("Movie genres must be formatted as an array"),
-  ].map((rule) => rule.toArray());
+  ];
 };
 
 const reviewValidationRules = () => {
@@ -118,7 +117,7 @@ const reviewValidationRules = () => {
       .withMessage("Comment cannot be empty")
       .isString()
       .withMessage("Comment must be a string"),
-  ].map((rule) => rule.toArray());
+  ];
 };
 
 const userValidationRules = () => {
@@ -148,7 +147,7 @@ const userValidationRules = () => {
       .withMessage("Email cannot be empty")
       .isEmail()
       .withMessage("Must be a valid email address"),
-  ].map((rule) => rule.toArray());
+  ];
 };
 
 function isValidationErrorWithPath(

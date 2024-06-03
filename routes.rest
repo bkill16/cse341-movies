@@ -179,7 +179,7 @@ DELETE https://cse341-movies.onrender.com/users/665b94eba89101ac2f8db87c HTTP/1.
 GET http://localhost:3000/reviews HTTP/1.1
 
 ### Get review by id
-GET http://localhost3000:/reviews/665b971c132fccb1d04f8c95
+GET http://localhost:3000/reviews/665b971c132fccb1d04f8c95
 
 ### Create review
 POST http://localhost:3000/reviews HTTP/1.1
