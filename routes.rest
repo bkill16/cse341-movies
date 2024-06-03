@@ -15,9 +15,9 @@ Content-Type: application/json
 
 {
   "title": "The Awesome Movie",
-  "releaseYear": "goat",
+  "releaseYear": "2024",
   "director": "John Smith",
-  "rated": "P",
+  "rated": "PG",
   "runtime": "90 mins",
   "description": "This is a really awesome movie",
   "cast": [
