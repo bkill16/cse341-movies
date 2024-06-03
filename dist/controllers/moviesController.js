@@ -38,7 +38,7 @@ const createMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         runtime: req.body.runtime,
         description: req.body.description,
         cast: req.body.cast,
-        genres: req.body.genres
+        genres: req.body.genres,
     };
     const response = yield (0, connect_1.getDb)().collection("movies").insertOne(movie);
     if (response.acknowledged) {
@@ -59,7 +59,7 @@ const updateMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         runtime: req.body.runtime,
         description: req.body.description,
         cast: req.body.cast,
-        genres: req.body.genres
+        genres: req.body.genres,
     };
     const response = yield (0, connect_1.getDb)()
         .collection("movies")
@@ -74,7 +74,9 @@ const updateMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 exports.updateMovie = updateMovie;
 const deleteMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = new mongodb_1.ObjectId(req.params.id);
-    const response = yield (0, connect_1.getDb)().collection("movies").deleteOne({ _id: userId });
+    const response = yield (0, connect_1.getDb)()
+        .collection("movies")
+        .deleteOne({ _id: userId });
     if (response.deletedCount > 0) {
         res.status(204).send();
     }
