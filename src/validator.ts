@@ -19,10 +19,10 @@ interface ExtractedError {
   [key: string]: string;
 }
 
-function isValidationErrorWithParam(
+function isValidationErrorWithPath(
   err: ValidationError
-): err is ValidationError & { param: string } {
-  return "param" in err;
+): err is ValidationError & { path: string } {
+  return "path" in err;
 }
 
 const validate = (req: Request, res: Response, next: NextFunction) => {
@@ -31,12 +31,14 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
     return next();
   }
 
-  const extractedErrors: ExtractedError[] = [];
+  const extractedErrors: Record<string, string> = {};
   errors.array().forEach((err) => {
-    if (isValidationErrorWithParam(err)) {
-      extractedErrors.push({ [err.param]: err.msg });
+    if (isValidationErrorWithPath(err)) {
+      extractedErrors[err.path] = err.msg;
     }
   });
+
+  return res.status(400).json({ errors: extractedErrors });
 };
 
-export { idValidationRules,userValidationRules, validate };
+export { validate, idValidationRules, userValidationRules }
