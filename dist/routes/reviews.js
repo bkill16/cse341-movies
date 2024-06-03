@@ -22,13 +22,16 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = require("express");
-const reviewsController = __importStar(require("../controllers/reviewsController"));
-const router = (0, express_1.Router)();
-router.get("/", reviewsController.getAllReviews);
-router.get("/:id", reviewsController.getSingleReview);
-router.post("/", reviewsController.createReview);
-router.put("/:id", reviewsController.updateReview);
-router.delete("/:id", reviewsController.deleteReview);
+const express_1 = __importDefault(require("express"));
+const reviewsController = __importStar(require("../controllers/reviews"));
+const router = express_1.default.Router();
+router.get('/reviews', reviewsController.getAllReviews);
+router.get('/reviews/:id', reviewsController.getSingleReview);
+router.post('/reviews', reviewsController.createReview);
+router.put('/reviews/:id', reviewsController.updateReview);
+router.delete('/reviews/:id', reviewsController.deleteReview);
 exports.default = router;

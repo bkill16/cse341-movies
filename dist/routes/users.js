@@ -22,11 +22,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = require("express");
+const express_1 = __importDefault(require("express"));
 const usersController = __importStar(require("../controllers/users"));
 const validator_1 = require("../validator");
-const router = (0, express_1.Router)();
+const router = express_1.default.Router();
 router.get("/", usersController.getAllUsers);
 router.get("/:id", (0, validator_1.idValidationRules)(), validator_1.validate, usersController.getSingleUser);
 router.post("/", (0, validator_1.userValidationRules)(), validator_1.validate, usersController.createUser);

@@ -1,4 +1,4 @@
-import express, { Router } from "express";
+import express from "express";
 import * as usersController from "../controllers/users";
 import { idValidationRules, userValidationRules, validate } from "../validator";
 
