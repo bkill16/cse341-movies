@@ -51,13 +51,60 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Movie"
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "releaseYear": {
+                  "type": "string",
+                  "pattern": "^\\d{4}$"
+                },
+                "director": {
+                  "type": "string"
+                },
+                "rated": {
+                  "type": "string"
+                },
+                "runtime": {
+                  "type": "string",
+                  "pattern": "^\\d{1,3} mins$"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "cast": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "genres": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "title",
+                "releaseYear",
+                "director",
+                "rated",
+                "runtime",
+                "description",
+                "cast",
+                "genres"
+              ]
             }
           }
         ],
         "responses": {
           "201": {
             "description": "Movie was successfully created"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal server error"
@@ -107,13 +154,60 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Movie"
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "releaseYear": {
+                  "type": "string",
+                  "pattern": "^\\d{4}$"
+                },
+                "director": {
+                  "type": "string"
+                },
+                "rated": {
+                  "type": "string"
+                },
+                "runtime": {
+                  "type": "string",
+                  "pattern": "^\\d{1,3} mins$"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "cast": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "genres": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "title",
+                "releaseYear",
+                "director",
+                "rated",
+                "runtime",
+                "description",
+                "cast",
+                "genres"
+              ]
             }
           }
         ],
         "responses": {
           "204": {
             "description": "Movie was successfully updated"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "404": {
             "description": "Movie not found"
@@ -175,13 +269,33 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Review"
+              "type": "object",
+              "properties": {
+                "movieId": {
+                  "type": "string"
+                },
+                "userId": {
+                  "type": "string"
+                },
+                "score": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 5
+                },
+                "comment": {
+                  "type": "string"
+                }
+              },
+              "required": ["movieId", "userId", "score", "comment"]
             }
           }
         ],
         "responses": {
           "201": {
             "description": "Review was successfully created"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal server error"
@@ -231,13 +345,33 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Review"
+              "type": "object",
+              "properties": {
+                "movieId": {
+                  "type": "string"
+                },
+                "userId": {
+                  "type": "string"
+                },
+                "score": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 5
+                },
+                "comment": {
+                  "type": "string"
+                }
+              },
+              "required": ["movieId", "userId", "score", "comment"]
             }
           }
         ],
         "responses": {
           "204": {
             "description": "Review was successfully updated"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "404": {
             "description": "Review not found"
@@ -299,13 +433,29 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/User"
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email"
+                }
+              },
+              "required": ["username", "password", "email"]
             }
           }
         ],
         "responses": {
           "201": {
             "description": "User was successfully created"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal server error"
@@ -355,13 +505,29 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/User"
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email"
+                }
+              },
+              "required": ["username", "password", "email"]
             }
           }
         ],
         "responses": {
           "204": {
             "description": "User was successfully updated"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "404": {
             "description": "User not found"

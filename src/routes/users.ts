@@ -2,7 +2,7 @@ import { Router } from "express";
 import * as usersController from "../controllers/users";
 import { idValidationRules, userValidationRules, validate } from "../validator";
 
-const router: Router = Router();
+const router = express.Router();
 
 router.get("/", usersController.getAllUsers);
 router.get("/:id", idValidationRules(), validate, usersController.getSingleUser);
