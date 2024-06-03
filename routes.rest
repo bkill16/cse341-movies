@@ -17,8 +17,8 @@ Content-Type: application/json
   "title": "The Awesome Movie",
   "releaseYear": "2024",
   "director": "John Smith",
-  "rated": "PG-13",
-  "runtime": "120 mins",
+  "rated": "P",
+  "runtime": "90 mins",
   "description": "This is a really awesome movie",
   "cast": [
     "Billy Bob",
@@ -124,9 +124,9 @@ POST http://localhost:3000/users HTTP/1.1
 Content-Type: application/json
 
 {
-  "username": "coolusername",
+  "username": "",
   "password": "coolpassword",
-  "email": "coolemail@email.com"
+  "email": "coolemailemail.com"
 }
 
 ### Update user
@@ -140,7 +140,7 @@ Content-Type: application/json
 }
 
 ### Delete user
-DELETE http://localhost:3000/users/665b94eba89101ac2f8db87c HTTP/1.1
+DELETE http://localhost:3000/users/665de4f21e1a2e720868cba3 HTTP/1.1
 
 // RENDER - USERS
 
