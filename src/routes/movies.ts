@@ -8,7 +8,7 @@ import {
   validateMovieData,
   validateObjectId,
   validateRequest,
-} from "../controllers/moviesController";
+} from "../controllers/movies";
 
 const router = express.Router();
 

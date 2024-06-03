@@ -8,7 +8,7 @@ import {
   validateReviewData,
   validateObjectId,
   validateRequest,
-} from "../controllers/reviewsController";
+} from "../controllers/reviews";
 
 const router = express.Router();
 
