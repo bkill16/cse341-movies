@@ -8,10 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUser = exports.updateUser = exports.createUser = exports.getSingleUser = exports.getAllUsers = void 0;
 const mongodb_1 = require("mongodb");
 const connect_1 = require("../db/connect");
+const bcrypt_1 = __importDefault(require("bcrypt"));
+const saltRounds = 10;
 const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield (0, connect_1.getDb)().collection("users").find();
@@ -56,6 +61,8 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             password: req.body.password,
             email: req.body.email,
         };
+        const hashedPassword = yield bcrypt_1.default.hash(user.password, saltRounds);
+        user.password = hashedPassword;
         const response = yield (0, connect_1.getDb)().collection("users").insertOne(user);
         if (response.acknowledged) {
             res.status(201).json(response);
@@ -80,6 +87,8 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             password: req.body.password,
             email: req.body.email,
         };
+        const hashedPassword = yield bcrypt_1.default.hash(user.password, saltRounds);
+        user.password = hashedPassword;
         const response = yield (0, connect_1.getDb)()
             .collection("users")
             .replaceOne({ _id: userId }, user);

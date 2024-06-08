@@ -124,23 +124,23 @@ POST http://localhost:3000/users HTTP/1.1
 Content-Type: application/json
 
 {
-  "username": "",
-  "password": "coolpassword",
-  "email": "coolemailemail.com"
+  "username": "bsmith1",
+  "password": "Aw3$om3Pas$Word",
+  "email": "bsmith@email.com"
 }
 
 ### Update user
-PUT http://localhost:3000/users/665b94eba89101ac2f8db87c HTTP/1.1
+PUT http://localhost:3000/users/6664a3daf856d53e648b9b7c HTTP/1.1
 Content-Type: application/json
 
 {
-  "username": "cool_username",
-  "password": "awesome_password",
-  "email": "coolemail@email.com"
+  "username": "bsmith2",
+  "password": "Aw3$om3Pas$Word",
+  "email": "bsmith@email.com"
 }
 
 ### Delete user
-DELETE http://localhost:3000/users/665de4f21e1a2e720868cba3 HTTP/1.1
+DELETE http://localhost:3000/users/665b9145132fccb1d04f8c94 HTTP/1.1
 
 // RENDER - USERS
 

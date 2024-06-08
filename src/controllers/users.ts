@@ -1,6 +1,9 @@
 import { ObjectId } from "mongodb";
 import { Request, Response } from "express";
 import { getDb } from "../db/connect";
+import bcrypt from "bcrypt";
+
+const saltRounds = 10;
 
 const getAllUsers = async (req: Request, res: Response) => {
   try {
@@ -43,6 +46,10 @@ const createUser = async (req: Request, res: Response) => {
       password: req.body.password,
       email: req.body.email,
     };
+
+    const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+    user.password = hashedPassword;
+
     const response = await getDb().collection("users").insertOne(user);
 
     if (response.acknowledged) {
@@ -66,6 +73,10 @@ const updateUser = async (req: Request, res: Response) => {
       password: req.body.password,
       email: req.body.email,
     };
+
+    const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+    user.password = hashedPassword;
+
     const response = await getDb()
       .collection("users")
       .replaceOne({ _id: userId }, user);

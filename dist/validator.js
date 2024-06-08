@@ -8,10 +8,9 @@ const idValidationRules = () => {
             .exists()
             .notEmpty()
             .withMessage("ID must not be empty")
-            .isString()
-            .isLength({ min: 24, max: 24 })
-            .withMessage("ID must be a 24 character string"),
-    ].map((rule) => rule.toArray());
+            .isMongoId()
+            .withMessage("Must be a valid MongoDB ID"),
+    ];
 };
 exports.idValidationRules = idValidationRules;
 const movieValidationRules = () => {
@@ -28,7 +27,9 @@ const movieValidationRules = () => {
             .withMessage("Release year cannot be empty")
             .isString()
             .isLength({ min: 4, max: 4 })
-            .withMessage("Release year must be a 4-digit string"),
+            .withMessage("Release year must be a 4 characters long")
+            .matches(/^\d{4}$/)
+            .withMessage("Release year must be a valid 4-digit year"),
         (0, express_validator_1.body)("director")
             .exists()
             .notEmpty()
@@ -73,7 +74,7 @@ const movieValidationRules = () => {
             .withMessage("Movie genres cannot be empty")
             .isArray()
             .withMessage("Movie genres must be formatted as an array"),
-    ].map((rule) => rule.toArray());
+    ];
 };
 exports.movieValidationRules = movieValidationRules;
 const reviewValidationRules = () => {
@@ -82,16 +83,12 @@ const reviewValidationRules = () => {
             .exists()
             .notEmpty()
             .withMessage("Movie ID must not be empty")
-            .isString()
-            .withMessage("Movie ID must not be a string")
             .isMongoId()
             .withMessage("Movie ID must be a valid MongoDB ID"),
         (0, express_validator_1.body)("userId")
             .exists()
             .notEmpty()
-            .withMessage("User ID must not be empty")
-            .isString()
-            .withMessage("User ID must not be a string")
+            .withMessage("User ID must not empty")
             .isMongoId()
             .withMessage("User ID must be a valid MongoDB ID"),
         (0, express_validator_1.body)("score")
@@ -101,8 +98,8 @@ const reviewValidationRules = () => {
             .isNumeric()
             .withMessage("Score must be a number")
             .custom((value) => {
-            if (value < 0 || value > 5) {
-                throw new Error("Score must be between 0 and 5");
+            if (value < 0.5 || value > 5) {
+                throw new Error("Score must be between 0.5 and 5");
             }
             return true;
         }),
@@ -112,7 +109,7 @@ const reviewValidationRules = () => {
             .withMessage("Comment cannot be empty")
             .isString()
             .withMessage("Comment must be a string"),
-    ].map((rule) => rule.toArray());
+    ];
 };
 exports.reviewValidationRules = reviewValidationRules;
 const userValidationRules = () => {
@@ -130,15 +127,21 @@ const userValidationRules = () => {
             .isString()
             .isLength({ min: 8 })
             .withMessage("Password must be at least 8 characters long")
-            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)
-            .withMessage("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"),
+            .matches(/[a-z]/)
+            .withMessage("Password must contain at least one lowercase letter")
+            .matches(/[A-Z]/)
+            .withMessage("Password must contain at least one uppercase letter")
+            .matches(/[0-9]/)
+            .withMessage("Password must contain at least one number")
+            .matches(/[@$!%*?&]/)
+            .withMessage("Password must contain at least one special character"),
         (0, express_validator_1.body)("email")
             .exists()
             .notEmpty()
             .withMessage("Email cannot be empty")
             .isEmail()
             .withMessage("Must be a valid email address"),
-    ].map((rule) => rule.toArray());
+    ];
 };
 exports.userValidationRules = userValidationRules;
 function isValidationErrorWithPath(err) {
