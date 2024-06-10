@@ -1,9 +1,6 @@
 import { ObjectId } from "mongodb";
 import { Request, Response } from "express";
 import { getDb } from "../db/connect";
-import bcrypt from "bcrypt";
-
-const saltRounds = 10;
 
 const getAllUsers = async (req: Request, res: Response) => {
   try {
@@ -14,9 +11,7 @@ const getAllUsers = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.error("Error retrieving all users:", error);
-    res
-      .status(500)
-      .json({ error: "An error occured while retrieving all users" });
+    res.status(500).json({ error: "An error occurred while retrieving all users" });
   }
 };
 
@@ -33,9 +28,7 @@ const getSingleUser = async (req: Request, res: Response) => {
     }
   } catch (error) {
     console.error("Error retrieving user by ID:", error);
-    res
-      .status(500)
-      .json({ error: "An error occured while retrieving the user" });
+    res.status(500).json({ error: "An error occurred while retrieving the user" });
   }
 };
 
@@ -47,21 +40,16 @@ const createUser = async (req: Request, res: Response) => {
       email: req.body.email,
     };
 
-    const hashedPassword = await bcrypt.hash(user.password, saltRounds);
-    user.password = hashedPassword;
-
     const response = await getDb().collection("users").insertOne(user);
 
     if (response.acknowledged) {
       res.status(201).json(response);
     } else {
-      res.status(500).json({
-        error: "An error occured while creating the user",
-      });
+      res.status(500).json({ error: "An error occurred while creating the user" });
     }
   } catch (error) {
     console.error("Error creating user:", error);
-    res.status(500).json({ error: "An error occured while creating the user" });
+    res.status(500).json({ error: "An error occurred while creating the user" });
   }
 };
 
@@ -74,12 +62,7 @@ const updateUser = async (req: Request, res: Response) => {
       email: req.body.email,
     };
 
-    const hashedPassword = await bcrypt.hash(user.password, saltRounds);
-    user.password = hashedPassword;
-
-    const response = await getDb()
-      .collection("users")
-      .replaceOne({ _id: userId }, user);
+    const response = await getDb().collection("users").replaceOne({ _id: userId }, user);
     if (response.modifiedCount > 0) {
       res.status(204).send();
     } else {
@@ -87,16 +70,14 @@ const updateUser = async (req: Request, res: Response) => {
     }
   } catch (error) {
     console.error("Error updating user:", error);
-    res.status(500).json({ error: "An error occured while updating the user" });
+    res.status(500).json({ error: "An error occurred while updating the user" });
   }
 };
 
 const deleteUser = async (req: Request, res: Response) => {
   try {
     const userId = new ObjectId(req.params.id);
-    const response = await getDb()
-      .collection("users")
-      .deleteOne({ _id: userId });
+    const response = await getDb().collection("users").deleteOne({ _id: userId });
     if (response.deletedCount > 0) {
       res.status(204).send();
     } else {
@@ -104,7 +85,7 @@ const deleteUser = async (req: Request, res: Response) => {
     }
   } catch (error) {
     console.error("Error deleting user:", error);
-    res.status(500).json({ error: "An error occured while deleting the user" });
+    res.status(500).json({ error: "An error occurred while deleting the user" });
   }
 };
 
