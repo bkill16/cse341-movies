@@ -30,19 +30,15 @@ export async function storeUserInMongoDB(db: Db, userInfo: UserInfo): Promise<vo
   }
 }
 
-const getAllUsers = async (req: Request, res: Response) => {
+export const getAllUsers = async (req: Request, res: Response) => {
   try {
-    const result = await getDb().collection("users").find();
-    result.toArray().then((lists) => {
-      res.setHeader("Content-Type", "application/json");
-      res.status(200).json(lists);
-    });
+    const collection = getDb().collection("users");
+    const result = await collection.find().toArray();
+    res.setHeader("Content-Type", "application/json");
+    res.status(200).json(result);
   } catch (error) {
     console.error("Error retrieving all users:", error);
-    res
-      .status(500)
-      .json({ error: "An error occured while retrieving all users" });
+    res.status(500).json({ error: "An error occurred while retrieving all users" });
   }
 };
 
-export { getAllUsers };
