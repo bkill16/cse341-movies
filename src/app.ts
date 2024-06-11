@@ -3,7 +3,7 @@ import mongodb = require("./db/connect");
 import { Db } from "mongodb";
 import router from "./routes";
 import { storeUserInMongoDB, UserInfo } from "./controllers/users";
-import { auth, RequestContext } from "express-openid-connect";
+import { auth, requiresAuth } from 'express-openid-connect';
 
 import dotenv = require("dotenv");
 dotenv.config();
@@ -63,21 +63,10 @@ app.get("/", async (req: Request, res: Response) => {
   }
 });
 
-app.get("/login", (req: Request, res: Response) => {
-  const returnTo = encodeURIComponent("https://cse341-movies.onrender.com");
-  const auth0Domain = "https://dev-mhlztk2ldiohgn5y.us.auth0.com";
-  const clientId = "uRuRVh5ltGB0I0fsjZVb1GvEIboIfYD5";
-  res.redirect(`${auth0Domain}/authorize?response_type=code&client_id=${clientId}&redirect_uri=${returnTo}`);
+app.get('/profile', requiresAuth(), (req, res) => {
+  res.send(JSON.stringify(req.oidc.user));
 });
 
-app.get("/profile", (req: Request, res: Response) => {
-  if (req.oidc.isAuthenticated()) {
-    res.send(req.oidc.user);
-  } else {
-    res.status(401).send("Unauthorized");
-  }
-});
-
-app.get("/logout", (req: Request, res: Response) => {
-  res.redirect(`https://dev-mhlztk2ldiohgn5y.us.auth0.com/v2/logout?returnTo=https://cse341-movies.onrender.com&client_id=${config.clientID}`);
+app.get('/logout', (req, res) => {
+  res.oidc.logout({ returnTo: 'http://cse341-movies.onrender.com' });
 });

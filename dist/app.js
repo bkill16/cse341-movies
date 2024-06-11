@@ -78,6 +78,3 @@ app.get("/profile", (req, res) => {
         res.status(401).send("Unauthorized");
     }
 });
-app.get("/logout", (req, res) => {
-    res.redirect(`https://dev-mhlztk2ldiohgn5y.us.auth0.com/v2/logout?returnTo=https://cse341-movies.onrender.com&client_id=${exports.config.clientID}`);
-});
