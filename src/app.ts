@@ -4,26 +4,33 @@ import { Db } from "mongodb";
 import router from "./routes";
 import { storeUserInMongoDB, UserInfo } from "./controllers/users";
 import { auth, requiresAuth } from 'express-openid-connect';
+import session from 'express-session';
 
 import dotenv = require("dotenv");
 dotenv.config();
 
+const app = express();
+
 export const config = {
   authRequired: false,
   auth0Logout: true,
-  secret: process.env.SECRET_STRING,
+  secret: process.env.SECRET_STRING as string,
   baseURL: "https://cse341-movies.onrender.com",
-  clientID: "uRuRVh5ltGB0I0fsjZVb1GvEIboIfYD5",
+  clientID: process.env.CLIENT_ID,
   issuerBaseURL: "https://dev-mhlztk2ldiohgn5y.us.auth0.com",
 };
 
+app.use(session({
+  secret: process.env.SESSION_STRING as string,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
+
 const port = process.env.PORT || 3000;
-const app = express();
 
 app.use(express.json());
-
 app.use(auth(config));
-
 app.use("/", router);
 
 let db: Db;
@@ -68,5 +75,10 @@ app.get('/profile', requiresAuth(), (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-  res.oidc.logout({ returnTo: 'http://cse341-movies.onrender.com' });
+  req.session.destroy((err) => {
+      if (err) {
+          return res.status(500).send('Failed to log out');
+      }
+      res.oidc.logout({ returnTo: 'http://cse341-movies.onrender.com' });
+  });
 });
