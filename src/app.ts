@@ -63,6 +63,13 @@ app.get("/", async (req: Request, res: Response) => {
   }
 });
 
+app.get("/login", (req: Request, res: Response) => {
+  const returnTo = encodeURIComponent("https://cse341-movies.onrender.com");
+  const auth0Domain = "https://dev-mhlztk2ldiohgn5y.us.auth0.com";
+  const clientId = "uRuRVh5ltGB0I0fsjZVb1GvEIboIfYD5";
+  res.redirect(`${auth0Domain}/authorize?response_type=code&client_id=${clientId}&redirect_uri=${returnTo}`);
+});
+
 app.get("/profile", (req: Request, res: Response) => {
   if (req.oidc.isAuthenticated()) {
     res.send(req.oidc.user);
