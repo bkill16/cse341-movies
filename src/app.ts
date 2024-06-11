@@ -1,10 +1,10 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import mongodb = require("./db/connect");
 import { Db } from "mongodb";
 import router from "./routes";
-import { storeUserInMongoDB, UserInfo } from "./controllers/users";
-import { auth, requiresAuth } from 'express-openid-connect';
-import session from 'express-session';
+// import { storeUserInMongoDB, UserInfo } from "./controllers/users";
+import { auth } from 'express-openid-connect';
+// import session from 'express-session';
 import dotenv = require("dotenv");
 
 dotenv.config();
@@ -20,17 +20,16 @@ export const config = {
   issuerBaseURL: "https://dev-mhlztk2ldiohgn5y.us.auth0.com",
 };
 
-app.use(session({
-  secret: process.env.SESSION_STRING as string,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
-}));
+// app.use(session({
+//   secret: process.env.SESSION_STRING as string,
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: { secure: true }
+// }));
 
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(auth(config));
 app.use("/", router);
 
 let db: Db;
@@ -46,40 +45,33 @@ mongodb.initDb((err: Error | null, database: Db | null) => {
   }
 });
 
-app.get("/", async (req: Request, res: Response) => {
-  if (req.oidc.isAuthenticated()) {
-    const user = req.oidc.user;
-    console.log("Authenticated user:", user);
-    if (user) {
-      const userInfo: UserInfo = {
-        userId: user.sub,
-        email: user.email,
-      };
+// app.get("/", async (req: Request, res: Response) => {
+//   if (req.oidc.isAuthenticated()) {
+//     const user = req.oidc.user;
+//     console.log("Authenticated user:", user);
+//     if (user) {
+//       const userInfo: UserInfo = {
+//         userId: user.sub,
+//         email: user.email,
+//       };
 
-      try {
-        await storeUserInMongoDB(db, userInfo);
-        res.send("Logged in");
-      } catch (error) {
-        console.error("Error storing user information:", error);
-        res.status(500).send("Internal Server Error");
-      }
-    } else {
-      res.status(401).send("Unauthorized");
-    }
-  } else {
-    res.send("Logged out");
-  }
-});
+//       try {
+//         await storeUserInMongoDB(db, userInfo);
+//         res.send("Logged in");
+//       } catch (error) {
+//         console.error("Error storing user information:", error);
+//         res.status(500).send("Internal Server Error");
+//       }
+//     } else {
+//       res.status(401).send("Unauthorized");
+//     }
+//   } else {
+//     res.send("Logged out");
+//   }
+// });
 
-app.get('/profile', requiresAuth(), (req, res) => {
-  res.send(JSON.stringify(req.oidc.user));
-});
+app.use(auth(config));
 
-app.get('/logout', (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      return res.status(500).send('Failed to log out');
-    }
-    res.oidc.logout({ returnTo: config.baseURL });
-  });
+app.get('/', (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
 });
