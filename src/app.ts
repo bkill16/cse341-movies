@@ -1,13 +1,22 @@
-/// <reference path="./types/express.d.ts" />
-
 import express = require("express");
 import mongodb = require("./db/connect");
 import { Db } from "mongodb";
 import router from "./routes";
-import { config } from "./authConfig";
 import { storeUserInMongoDB, UserInfo } from "./controllers/users";
 
 const { auth } = require("express-openid-connect");
+
+import dotenv = require("dotenv");
+dotenv.config();
+
+export const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: process.env.SECRET_STRING,
+  baseURL: "https://cse341-movies.onrender.com",
+  clientID: "uRuRVh5ltGB0I0fsjZVb1GvEIboIfYD5",
+  issuerBaseURL: "https://dev-mhlztk2ldiohgn5y.us.auth0.com",
+};
 
 const port = process.env.PORT || 3000;
 const app = express();
