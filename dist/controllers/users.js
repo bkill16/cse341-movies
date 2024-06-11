@@ -8,13 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllUsers = exports.storeUserInMongoDB = void 0;
 const connect_1 = require("../db/connect");
-const bcrypt_1 = __importDefault(require("bcrypt"));
 const collectionName = "users";
 function storeUserInMongoDB(db, userInfo) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -25,8 +21,6 @@ function storeUserInMongoDB(db, userInfo) {
                 throw new Error("User already exists");
             }
             else {
-                const hashedPassword = yield bcrypt_1.default.hash(userInfo.password, 10);
-                userInfo.password = hashedPassword;
                 yield collection.insertOne(userInfo);
                 console.log("User info stored successfully");
             }
@@ -40,7 +34,7 @@ function storeUserInMongoDB(db, userInfo) {
 exports.storeUserInMongoDB = storeUserInMongoDB;
 const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const collection = (0, connect_1.getDb)().collection("users");
+        const collection = (0, connect_1.getDb)().collection(collectionName);
         const result = yield collection.find().toArray();
         res.setHeader("Content-Type", "application/json");
         res.status(200).json(result);

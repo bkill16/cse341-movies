@@ -18,18 +18,25 @@ const mongodb = require("./db/connect");
 const routes_1 = __importDefault(require("./routes"));
 const users_1 = require("./controllers/users");
 const express_openid_connect_1 = require("express-openid-connect");
+const express_session_1 = __importDefault(require("express-session"));
 const dotenv = require("dotenv");
 dotenv.config();
+const app = (0, express_1.default)();
 exports.config = {
     authRequired: false,
     auth0Logout: true,
     secret: process.env.SECRET_STRING,
     baseURL: "https://cse341-movies.onrender.com",
-    clientID: "uRuRVh5ltGB0I0fsjZVb1GvEIboIfYD5",
+    clientID: process.env.CLIENT_ID,
     issuerBaseURL: "https://dev-mhlztk2ldiohgn5y.us.auth0.com",
 };
+app.use((0, express_session_1.default)({
+    secret: process.env.SESSION_STRING,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+}));
 const port = process.env.PORT || 3000;
-const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, express_openid_connect_1.auth)(exports.config));
 app.use("/", routes_1.default);
@@ -40,18 +47,19 @@ mongodb.initDb((err, database) => {
     }
     else {
         db = database;
-        app.listen(port);
-        console.log(`Connected to DB and listening on ${port}`);
+        app.listen(port, () => {
+            console.log(`Connected to DB and listening on ${port}`);
+        });
     }
 });
 app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (req.oidc.isAuthenticated()) {
         const user = req.oidc.user;
+        console.log("Authenticated user:", user);
         if (user) {
             const userInfo = {
                 userId: user.sub,
                 email: user.email,
-                password: user.password,
             };
             try {
                 yield (0, users_1.storeUserInMongoDB)(db, userInfo);
@@ -70,11 +78,14 @@ app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.send("Logged out");
     }
 }));
-app.get("/profile", (req, res) => {
-    if (req.oidc.isAuthenticated()) {
-        res.send(req.oidc.user);
-    }
-    else {
-        res.status(401).send("Unauthorized");
-    }
+app.get('/profile', (0, express_openid_connect_1.requiresAuth)(), (req, res) => {
+    res.send(JSON.stringify(req.oidc.user));
+});
+app.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).send('Failed to log out');
+        }
+        res.oidc.logout({ returnTo: exports.config.baseURL });
+    });
 });

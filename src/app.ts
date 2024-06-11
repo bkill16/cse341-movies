@@ -5,8 +5,8 @@ import router from "./routes";
 import { storeUserInMongoDB, UserInfo } from "./controllers/users";
 import { auth, requiresAuth } from 'express-openid-connect';
 import session from 'express-session';
-
 import dotenv = require("dotenv");
+
 dotenv.config();
 
 const app = express();
@@ -40,19 +40,20 @@ mongodb.initDb((err: Error | null, database: Db | null) => {
     console.log(err);
   } else {
     db = database!;
-    app.listen(port);
-    console.log(`Connected to DB and listening on ${port}`);
+    app.listen(port, () => {
+      console.log(`Connected to DB and listening on ${port}`);
+    });
   }
 });
 
 app.get("/", async (req: Request, res: Response) => {
   if (req.oidc.isAuthenticated()) {
     const user = req.oidc.user;
+    console.log("Authenticated user:", user);
     if (user) {
       const userInfo: UserInfo = {
         userId: user.sub,
         email: user.email,
-        password: user.password,
       };
 
       try {
@@ -76,9 +77,9 @@ app.get('/profile', requiresAuth(), (req, res) => {
 
 app.get('/logout', (req, res) => {
   req.session.destroy((err) => {
-      if (err) {
-          return res.status(500).send('Failed to log out');
-      }
-      res.oidc.logout({ returnTo: 'http://cse341-movies.onrender.com' });
+    if (err) {
+      return res.status(500).send('Failed to log out');
+    }
+    res.oidc.logout({ returnTo: config.baseURL });
   });
 });

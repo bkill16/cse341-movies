@@ -6,7 +6,6 @@ declare global {
           user?: {
             sub: string;
             email: string;
-            password: string;
           };
           logout(): void;
         };

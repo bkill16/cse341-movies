@@ -1,14 +1,12 @@
 import { Db } from "mongodb";
 import { getDb } from "../db/connect";
 import { Request, Response } from "express";
-import bcrypt from "bcrypt";
 
 const collectionName = "users";
 
 export interface UserInfo {
   userId: string;
   email: string;
-  password: string;
 }
 
 export async function storeUserInMongoDB(db: Db, userInfo: UserInfo): Promise<void> {
@@ -19,8 +17,6 @@ export async function storeUserInMongoDB(db: Db, userInfo: UserInfo): Promise<vo
     if (existingUser) {
       throw new Error("User already exists");
     } else {
-      const hashedPassword = await bcrypt.hash(userInfo.password, 10);
-      userInfo.password = hashedPassword;
       await collection.insertOne(userInfo);
       console.log("User info stored successfully");
     }
@@ -32,7 +28,7 @@ export async function storeUserInMongoDB(db: Db, userInfo: UserInfo): Promise<vo
 
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
-    const collection = getDb().collection("users");
+    const collection = getDb().collection(collectionName);
     const result = await collection.find().toArray();
     res.setHeader("Content-Type", "application/json");
     res.status(200).json(result);
@@ -41,4 +37,3 @@ export const getAllUsers = async (req: Request, res: Response) => {
     res.status(500).json({ error: "An error occurred while retrieving all users" });
   }
 };
-
