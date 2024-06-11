@@ -7,6 +7,7 @@ declare namespace Express {
         email: string;
         password: string;
       };
+      logout: () => void;
     };
   }
 }

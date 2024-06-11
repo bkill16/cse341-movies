@@ -54,3 +54,16 @@ app.get("/", async (req: express.Request, res: express.Response) => {
     res.send("Logged out");
   }
 });
+
+app.get("/profile", (req: express.Request, res: express.Response) => {
+  if (req.oidc.isAuthenticated()) {
+    res.send(req.oidc.user);
+  } else {
+    res.status(401).send("Unauthorized");
+  }
+})
+
+app.get("/logout", (req: express.Request, res: express.Response) => {
+  req.oidc.logout();
+  res.redirect("/");
+});
