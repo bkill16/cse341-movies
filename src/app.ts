@@ -1,10 +1,9 @@
-import express = require("express");
+import express, { Request, Response } from "express";
 import mongodb = require("./db/connect");
 import { Db } from "mongodb";
 import router from "./routes";
 import { storeUserInMongoDB, UserInfo } from "./controllers/users";
-
-const { auth } = require("express-openid-connect");
+import { auth, RequestContext } from "express-openid-connect";
 
 import dotenv = require("dotenv");
 dotenv.config();
@@ -39,7 +38,7 @@ mongodb.initDb((err: Error | null, database: Db | null) => {
   }
 });
 
-app.get("/", async (req: express.Request, res: express.Response) => {
+app.get("/", async (req: Request, res: Response) => {
   if (req.oidc.isAuthenticated()) {
     const user = req.oidc.user;
     if (user) {
@@ -64,15 +63,14 @@ app.get("/", async (req: express.Request, res: express.Response) => {
   }
 });
 
-app.get("/profile", (req: express.Request, res: express.Response) => {
+app.get("/profile", (req: Request, res: Response) => {
   if (req.oidc.isAuthenticated()) {
     res.send(req.oidc.user);
   } else {
     res.status(401).send("Unauthorized");
   }
-})
+});
 
-app.get("/logout", (req: express.Request, res: express.Response) => {
-  req.oidc.logout();
-  res.redirect("/");
+app.get("/logout", (req: Request, res: Response) => {
+  res.redirect(`https://dev-mhlztk2ldiohgn5y.us.auth0.com/v2/logout?returnTo=https://cse341-movies.onrender.com&client_id=${config.clientID}`);
 });

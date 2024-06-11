@@ -28,12 +28,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const usersController = __importStar(require("../controllers/users"));
-const validator_1 = require("../validator");
 const router = express_1.default.Router();
 const { requiresAuth } = require("express-openid-connect");
 router.get("/", requiresAuth(), usersController.getAllUsers);
-router.get("/:id", requiresAuth(), (0, validator_1.idValidationRules)(), validator_1.validate, usersController.getSingleUser);
-router.post("/", (0, validator_1.userValidationRules)(), validator_1.validate, usersController.createUser);
-router.put("/:id", (0, validator_1.userValidationRules)(), validator_1.validate, usersController.updateUser);
-router.delete("/:id", (0, validator_1.idValidationRules)(), validator_1.validate, usersController.deleteUser);
 exports.default = router;

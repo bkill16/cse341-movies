@@ -12,11 +12,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUser = exports.updateUser = exports.createUser = exports.getSingleUser = exports.getAllUsers = void 0;
-const mongodb_1 = require("mongodb");
+exports.getAllUsers = exports.storeUserInMongoDB = void 0;
 const connect_1 = require("../db/connect");
 const bcrypt_1 = __importDefault(require("bcrypt"));
-const saltRounds = 10;
+const collectionName = "users";
+function storeUserInMongoDB(db, userInfo) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const collection = yield (0, connect_1.getDb)().collection(collectionName);
+            const existingUser = yield collection.findOne({ email: userInfo.email });
+            if (existingUser) {
+                throw new Error("User already exists");
+            }
+            else {
+                const hashedPassword = yield bcrypt_1.default.hash(userInfo.password, 10);
+                userInfo.password = hashedPassword;
+                yield collection.insertOne(userInfo);
+                console.log("User info stored successfully");
+            }
+        }
+        catch (error) {
+            console.error("Error storing user information:", error);
+            throw error;
+        }
+    });
+}
+exports.storeUserInMongoDB = storeUserInMongoDB;
 const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield (0, connect_1.getDb)().collection("users").find();
@@ -33,94 +54,3 @@ const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.getAllUsers = getAllUsers;
-const getSingleUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const userId = new mongodb_1.ObjectId(req.params.id);
-        const result = yield (0, connect_1.getDb)().collection("users").find({ _id: userId });
-        const lists = yield result.toArray();
-        if (lists.length === 0) {
-            res.status(404).json({ error: "User not found" });
-        }
-        else {
-            res.setHeader("Content-Type", "application/json");
-            res.status(200).json(lists[0]);
-        }
-    }
-    catch (error) {
-        console.error("Error retrieving user by ID:", error);
-        res
-            .status(500)
-            .json({ error: "An error occured while retrieving the user" });
-    }
-});
-exports.getSingleUser = getSingleUser;
-const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const user = {
-            username: req.body.username,
-            password: req.body.password,
-            email: req.body.email,
-        };
-        const hashedPassword = yield bcrypt_1.default.hash(user.password, saltRounds);
-        user.password = hashedPassword;
-        const response = yield (0, connect_1.getDb)().collection("users").insertOne(user);
-        if (response.acknowledged) {
-            res.status(201).json(response);
-        }
-        else {
-            res.status(500).json({
-                error: "An error occured while creating the user",
-            });
-        }
-    }
-    catch (error) {
-        console.error("Error creating user:", error);
-        res.status(500).json({ error: "An error occured while creating the user" });
-    }
-});
-exports.createUser = createUser;
-const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const userId = new mongodb_1.ObjectId(req.params.id);
-        const user = {
-            username: req.body.username,
-            password: req.body.password,
-            email: req.body.email,
-        };
-        const hashedPassword = yield bcrypt_1.default.hash(user.password, saltRounds);
-        user.password = hashedPassword;
-        const response = yield (0, connect_1.getDb)()
-            .collection("users")
-            .replaceOne({ _id: userId }, user);
-        if (response.modifiedCount > 0) {
-            res.status(204).send();
-        }
-        else {
-            res.status(404).json("User not found");
-        }
-    }
-    catch (error) {
-        console.error("Error updating user:", error);
-        res.status(500).json({ error: "An error occured while updating the user" });
-    }
-});
-exports.updateUser = updateUser;
-const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const userId = new mongodb_1.ObjectId(req.params.id);
-        const response = yield (0, connect_1.getDb)()
-            .collection("users")
-            .deleteOne({ _id: userId });
-        if (response.deletedCount > 0) {
-            res.status(204).send();
-        }
-        else {
-            res.status(404).json("User not found");
-        }
-    }
-    catch (error) {
-        console.error("Error deleting user:", error);
-        res.status(500).json({ error: "An error occured while deleting the user" });
-    }
-});
-exports.deleteUser = deleteUser;
