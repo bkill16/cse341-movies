@@ -1,6 +1,7 @@
 import { Db } from "mongodb";
 import { getDb } from "../db/connect";
 import { Request, Response } from "express";
+import bcrypt from "bcrypt";
 
 const collectionName = "users";
 
@@ -18,11 +19,14 @@ export async function storeUserInMongoDB(db: Db, userInfo: UserInfo): Promise<vo
     if (existingUser) {
       throw new Error("User already exists");
     } else {
+      const hashedPassword = await bcrypt.hash(userInfo.password, 10);
+      userInfo.password = hashedPassword;
       await collection.insertOne(userInfo);
-      console.log("user info stored successfully");
+      console.log("User info stored successfully");
     }
   } catch (error) {
-    console.log(error, "error in storing user info in mongodb");
+    console.error("Error storing user information:", error);
+    throw error;
   }
 }
 
