@@ -9,7 +9,7 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "typeRoots": ["node_modules/@types"]
+    "typeRoots": ["./node_modules/@types", "./types"]
   },
   "include": ["./src/**/*", "express-openid-connect.d.ts", "swagger.d.ts"],
   "exclude": ["node_modules"]

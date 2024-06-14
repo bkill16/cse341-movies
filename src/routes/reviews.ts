@@ -8,8 +8,8 @@ const { requiresAuth } = require("express-openid-connect");
 
 router.get('/', requiresAuth(), reviewsController.getAllReviews);
 router.get('/:id', requiresAuth(), idValidationRules(), validate, reviewsController.getSingleReview);
-router.post('/', reviewValidationRules(), validate, reviewsController.createReview);
-router.put('/:id', reviewValidationRules(), validate, reviewsController.updateReview);
-router.delete('/:id', idValidationRules(), validate, reviewsController.deleteReview);
+router.post('/', requiresAuth(), reviewValidationRules(), validate, reviewsController.createReview);
+router.put('/:id', requiresAuth(), reviewValidationRules(), validate, reviewsController.updateReview);
+router.delete('/:id', requiresAuth(), idValidationRules(), validate, reviewsController.deleteReview);
 
 export default router;

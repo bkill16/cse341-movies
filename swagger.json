@@ -27,6 +27,11 @@
       "get": {
         "summary": "Get all movies",
         "tags": ["Movies"],
+        "security": [
+          {
+            "auth0": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -37,14 +42,22 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
-            "description": "An error occured while retrieving all movies/Internal server error"
+            "description": "An error occurred while retrieving all movies/Internal server error"
           }
         }
       },
       "post": {
         "summary": "Create a new movie",
         "tags": ["Movies"],
+        "security": [
+          {
+            "auth0": []
+          }
+        ],
         "parameters": [
           {
             "name": "movie",
@@ -60,8 +73,11 @@
           "201": {
             "description": "Movie created successfully"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
-            "description": "An error occured while creating the movie/Internal server error"
+            "description": "An error occurred while creating the movie/Internal server error"
           }
         }
       }
@@ -70,6 +86,11 @@
       "get": {
         "summary": "Get a single movie by ID",
         "tags": ["Movies"],
+        "security": [
+          {
+            "auth0": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -86,17 +107,25 @@
               "$ref": "#/definitions/Movie"
             }
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Movie not found"
           },
           "500": {
-            "description": "An error occured while retrieving the movie/Internal server error"
+            "description": "An error occurred while retrieving the movie/Internal server error"
           }
         }
       },
       "put": {
         "summary": "Update a movie",
         "tags": ["Movies"],
+        "security": [
+          {
+            "auth0": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -119,17 +148,25 @@
           "204": {
             "description": "Movie updated successfully"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Movie not found"
           },
           "500": {
-            "description": "An error occured while updating the movie/Internal server error"
+            "description": "An error occurred while updating the movie/Internal server error"
           }
         }
       },
       "delete": {
         "summary": "Delete a movie",
         "tags": ["Movies"],
+        "security": [
+          {
+            "auth0": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -143,11 +180,14 @@
           "204": {
             "description": "Movie deleted successfully"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Movie not found"
           },
           "500": {
-            "description": "An error occured while deleting the movie/Internal server error"
+            "description": "An error occurred while deleting the movie/Internal server error"
           }
         }
       }
@@ -156,6 +196,11 @@
       "get": {
         "summary": "Get all reviews",
         "tags": ["Reviews"],
+        "security": [
+          {
+            "auth0": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -166,14 +211,22 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
-            "description": "An error occured while retrieving all reviews/Internal server error"
+            "description": "An error occurred while retrieving all reviews/Internal server error"
           }
         }
       },
       "post": {
         "summary": "Create a new review",
         "tags": ["Reviews"],
+        "security": [
+          {
+            "auth0": []
+          }
+        ],
         "parameters": [
           {
             "name": "review",
@@ -189,8 +242,11 @@
           "201": {
             "description": "Review created successfully"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
-            "description": "An error occured while creating the review/Internal server error"
+            "description": "An error occurred while creating the review/Internal server error"
           }
         }
       }
@@ -199,6 +255,11 @@
       "get": {
         "summary": "Get a single review by ID",
         "tags": ["Reviews"],
+        "security": [
+          {
+            "auth0": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -215,17 +276,25 @@
               "$ref": "#/definitions/Review"
             }
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Review not found"
           },
           "500": {
-            "description": "An error occured while retrieving the review/Internal server error"
+            "description": "An error occurred while retrieving the review/Internal server error"
           }
         }
       },
       "put": {
         "summary": "Update a review",
         "tags": ["Reviews"],
+        "security": [
+          {
+            "auth0": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -248,17 +317,25 @@
           "204": {
             "description": "Review updated successfully"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Review not found"
           },
           "500": {
-            "description": "An error occured while updating the review/Internal server error"
+            "description": "An error occurred while updating the review/Internal server error"
           }
         }
       },
       "delete": {
         "summary": "Delete a review",
         "tags": ["Reviews"],
+        "security": [
+          {
+            "auth0": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -272,11 +349,14 @@
           "204": {
             "description": "Review deleted successfully"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Review not found"
           },
           "500": {
-            "description": "An error occured while deleting the review/Internal server error"
+            "description": "An error occurred while deleting the review/Internal server error"
           }
         }
       }
@@ -285,6 +365,11 @@
       "get": {
         "summary": "Get all users",
         "tags": ["Users"],
+        "security": [
+          {
+            "auth0": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -295,31 +380,11 @@
               }
             }
           },
-          "500": {
-            "description": "An error occured while retrieving all users/Internal server error"
-          }
-        }
-      },
-      "post": {
-        "summary": "Create a new user",
-        "tags": ["Users"],
-        "parameters": [
-          {
-            "name": "user",
-            "in": "body",
-            "description": "User object",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "User created successfully"
+          "401": {
+            "description": "Unauthorized"
           },
           "500": {
-            "description": "An error occured while creating the user/Internal server error"
+            "description": "An error occurred while retrieving all users/Internal server error"
           }
         }
       }
@@ -328,6 +393,11 @@
       "get": {
         "summary": "Get a single user by ID",
         "tags": ["Users"],
+        "security": [
+          {
+            "auth0": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -344,68 +414,14 @@
               "$ref": "#/definitions/User"
             }
           },
-          "404": {
-            "description": "User not found"
-          },
-          "500": {
-            "description": "An error occured while retrieving the user/Internal server error"
-          }
-        }
-      },
-      "put": {
-        "summary": "Update a user",
-        "tags": ["Users"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of the user to update",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "user",
-            "in": "body",
-            "description": "Updated user object",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "User updated successfully"
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "User not found"
           },
           "500": {
-            "description": "An error occured while updating the user/Internal server error"
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete a user",
-        "tags": ["Users"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of the user to delete",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "User deleted successfully"
-          },
-          "404": {
-            "description": "User not found"
-          },
-          "500": {
-            "description": "An error occured while deleting the user/Internal server error"
+            "description": "An error occurred while retrieving the user/Internal server error"
           }
         }
       }
@@ -414,72 +430,86 @@
   "definitions": {
     "Movie": {
       "type": "object",
+      "required": ["title", "description"],
       "properties": {
-        "title": {
-          "type": "string"
-        },
-        "releaseYear": {
-          "type": "string"
-        },
-        "director": {
-          "type": "string"
-        },
-        "rated": {
+        "id": {
           "type": "string",
-          "enum": ["G", "PG", "PG-13", "R", "NC-17"]
+          "example": "60d21b4667d0d8992e610c85"
         },
-        "runtime": {
-          "type": "string"
+        "title": {
+          "type": "string",
+          "example": "The Shawshank Redemption"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "example": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency."
         },
-        "cast": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "releaseYear": {
+          "type": "integer",
+          "example": 1994
         },
-        "genres": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "genre": {
+          "type": "string",
+          "example": "Drama"
+        },
+        "director": {
+          "type": "string",
+          "example": "Frank Darabont"
         }
       }
     },
     "Review": {
       "type": "object",
+      "required": ["movieId", "reviewer", "rating", "comment"],
       "properties": {
+        "id": {
+          "type": "string",
+          "example": "60d21b4667d0d8992e610c85"
+        },
         "movieId": {
-          "type": "string"
+          "type": "string",
+          "example": "60d21b4667d0d8992e610c85"
         },
-        "userId": {
-          "type": "string"
+        "reviewer": {
+          "type": "string",
+          "example": "John Doe"
         },
-        "score": {
-          "type": "number",
-          "minimum": 0,
-          "maximum": 5
+        "rating": {
+          "type": "integer",
+          "example": 5
         },
         "comment": {
-          "type": "string"
+          "type": "string",
+          "example": "An outstanding movie with excellent performances."
         }
       }
     },
     "User": {
       "type": "object",
+      "required": ["email", "name"],
       "properties": {
-        "username": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
+        "id": {
+          "type": "string",
+          "example": "60d21b4667d0d8992e610c85"
         },
         "email": {
           "type": "string",
-          "format": "email"
+          "example": "user@example.com"
+        },
+        "name": {
+          "type": "string",
+          "example": "John Doe"
         }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "auth0": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://dev-mhlztk2ldiohgn5y.us.auth0.com/authorize",
+      "scopes": {
+        "openid": "OpenID Connect scope"
       }
     }
   }
