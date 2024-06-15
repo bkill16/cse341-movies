@@ -414,16 +414,12 @@
         "genres"
       ],
       "properties": {
-        "id": {
-          "type": "string",
-          "example": "60d21b4667d0d8992e610c85"
-        },
         "title": {
           "type": "string",
           "example": "The Shawshank Redemption"
         },
         "releaseYear": {
-          "type": "integer",
+          "type": "string",
           "example": 1994
         },
         "director": {
@@ -461,10 +457,6 @@
       "type": "object",
       "required": ["movieId", "userId", "score", "comment"],
       "properties": {
-        "id": {
-          "type": "string",
-          "example": "60d21b4667d0d8992e610c85"
-        },
         "movieId": {
           "type": "string",
           "example": "60d21b4667d0d8992e610c85"
@@ -487,10 +479,6 @@
       "type": "object",
       "required": ["userId", "email"],
       "properties": {
-        "id": {
-          "type": "string",
-          "example": "60d21b4667d0d8992e610c85"
-        },
         "userId": {
           "type": "string",
           "example": "auth0|60d21b4667d0d8992e610c85"
