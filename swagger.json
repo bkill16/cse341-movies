@@ -430,7 +430,7 @@
   "definitions": {
     "Movie": {
       "type": "object",
-      "required": ["title", "description"],
+      "required": ["title", "releaseYear", "director", "rated", "runtime", "description", "cast", "genres"],
       "properties": {
         "id": {
           "type": "string",
@@ -440,27 +440,43 @@
           "type": "string",
           "example": "The Shawshank Redemption"
         },
-        "description": {
-          "type": "string",
-          "example": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency."
-        },
         "releaseYear": {
           "type": "integer",
           "example": 1994
         },
-        "genre": {
-          "type": "string",
-          "example": "Drama"
-        },
         "director": {
           "type": "string",
           "example": "Frank Darabont"
-        }
+        },
+        "rated": {
+          "type": "string",
+          "example": "R"
+        },
+        "runtime": {
+          "type": "string",
+          "example": "142 mins"
+        },
+        "description": {
+          "type": "string",
+          "example": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency."
+        },
+        "cast": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": ["Tim Robbins", "Morgan Freeman", "Bob Gunton"]
+        },
+        "genres": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
       }
     },
     "Review": {
       "type": "object",
-      "required": ["movieId", "reviewer", "rating", "comment"],
+      "required": ["movieId", "userId", "score", "comment"],
       "properties": {
         "id": {
           "type": "string",
@@ -470,13 +486,13 @@
           "type": "string",
           "example": "60d21b4667d0d8992e610c85"
         },
-        "reviewer": {
+        "userId": {
           "type": "string",
-          "example": "John Doe"
+          "example": "auth0|60d21b4667d0d8992e610c85"
         },
-        "rating": {
-          "type": "integer",
-          "example": 5
+        "score": {
+          "type": "number",
+          "example": 4.5
         },
         "comment": {
           "type": "string",
@@ -486,19 +502,19 @@
     },
     "User": {
       "type": "object",
-      "required": ["email", "name"],
+      "required": ["userId", "email"],
       "properties": {
         "id": {
           "type": "string",
           "example": "60d21b4667d0d8992e610c85"
         },
+        "userId": {
+          "type": "string",
+          "example": "auth0|60d21b4667d0d8992e610c85"
+        },
         "email": {
           "type": "string",
-          "example": "user@example.com"
-        },
-        "name": {
-          "type": "string",
-          "example": "John Doe"
+          "example": "kI5wQ@example.com"
         }
       }
     }
