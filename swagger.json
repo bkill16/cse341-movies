@@ -8,6 +8,16 @@
   "host": "cse341-movies.onrender.com",
   "basePath": "/",
   "schemes": ["https"],
+  "securityDefinitions": {
+    "auth0": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://dev-mhlztk2ldiohgn5y.us.auth0.com/authorize",
+      "scopes": {
+        "openid": "OpenID Connect scope"
+      }
+    }
+  },
   "tags": [
     {
       "name": "Movies",
@@ -525,16 +535,6 @@
             "type": "string",
             "example": "kI5wQ@example.com"
           }
-        }
-      }
-    },
-    "securityDefinitions": {
-      "auth0": {
-        "type": "oauth2",
-        "flow": "implicit",
-        "authorizationUrl": "https://dev-mhlztk2ldiohgn5y.us.auth0.com/authorize",
-        "scopes": {
-          "openid": "OpenID Connect scope"
         }
       }
     }
