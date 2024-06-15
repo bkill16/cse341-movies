@@ -430,7 +430,16 @@
   "definitions": {
     "Movie": {
       "type": "object",
-      "required": ["title", "releaseYear", "director", "rated", "runtime", "description", "cast", "genres"],
+      "required": [
+        "title",
+        "releaseYear",
+        "director",
+        "rated",
+        "runtime",
+        "description",
+        "cast",
+        "genres"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -472,60 +481,61 @@
           "items": {
             "type": "string"
           }
-      }
-    },
-    "Review": {
-      "type": "object",
-      "required": ["movieId", "userId", "score", "comment"],
-      "properties": {
-        "id": {
-          "type": "string",
-          "example": "60d21b4667d0d8992e610c85"
-        },
-        "movieId": {
-          "type": "string",
-          "example": "60d21b4667d0d8992e610c85"
-        },
-        "userId": {
-          "type": "string",
-          "example": "auth0|60d21b4667d0d8992e610c85"
-        },
-        "score": {
-          "type": "number",
-          "example": 4.5
-        },
-        "comment": {
-          "type": "string",
-          "example": "An outstanding movie with excellent performances."
+        }
+      },
+      "Review": {
+        "type": "object",
+        "required": ["movieId", "userId", "score", "comment"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "60d21b4667d0d8992e610c85"
+          },
+          "movieId": {
+            "type": "string",
+            "example": "60d21b4667d0d8992e610c85"
+          },
+          "userId": {
+            "type": "string",
+            "example": "auth0|60d21b4667d0d8992e610c85"
+          },
+          "score": {
+            "type": "number",
+            "example": 4.5
+          },
+          "comment": {
+            "type": "string",
+            "example": "An outstanding movie with excellent performances."
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "required": ["userId", "email"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "60d21b4667d0d8992e610c85"
+          },
+          "userId": {
+            "type": "string",
+            "example": "auth0|60d21b4667d0d8992e610c85"
+          },
+          "email": {
+            "type": "string",
+            "example": "kI5wQ@example.com"
+          }
         }
       }
     },
-    "User": {
-      "type": "object",
-      "required": ["userId", "email"],
-      "properties": {
-        "id": {
-          "type": "string",
-          "example": "60d21b4667d0d8992e610c85"
-        },
-        "userId": {
-          "type": "string",
-          "example": "auth0|60d21b4667d0d8992e610c85"
-        },
-        "email": {
-          "type": "string",
-          "example": "kI5wQ@example.com"
+    "securityDefinitions": {
+      "auth0": {
+        "type": "oauth2",
+        "flow": "implicit",
+        "authorizationUrl": "https://dev-mhlztk2ldiohgn5y.us.auth0.com/authorize",
+        "scopes": {
+          "openid": "OpenID Connect scope"
         }
-      }
-    }
-  },
-  "securityDefinitions": {
-    "auth0": {
-      "type": "oauth2",
-      "flow": "implicit",
-      "authorizationUrl": "https://dev-mhlztk2ldiohgn5y.us.auth0.com/authorize",
-      "scopes": {
-        "openid": "OpenID Connect scope"
       }
     }
   }
