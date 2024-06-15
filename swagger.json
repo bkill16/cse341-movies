@@ -471,7 +471,7 @@
         },
         "userId": {
           "type": "string",
-          "example": "auth0|60d21b4667d0d8992e610c85"
+          "example": "60d21b4667d0d8992e610c85"
         },
         "score": {
           "type": "number",
