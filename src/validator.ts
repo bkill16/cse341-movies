@@ -94,9 +94,7 @@ const reviewValidationRules = () => {
     body("userId")
       .exists()
       .notEmpty()
-      .withMessage("User ID must not empty")
-      .isMongoId()
-      .withMessage("User ID must be a valid MongoDB ID"),
+      .withMessage("User ID must not empty"),
     body("score")
       .exists()
       .notEmpty()
